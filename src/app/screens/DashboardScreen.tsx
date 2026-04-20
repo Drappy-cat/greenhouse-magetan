@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Bell, Wind, Flame, ThermometerSun, Droplets, CloudSun } from "lucide-react";
 import { BottomNav } from "../components/BottomNav";
@@ -6,6 +6,42 @@ import { BottomNav } from "../components/BottomNav";
 export function DashboardScreen() {
   const navigate = useNavigate();
   const [setpoint, setSetpoint] = useState(25);
+  const [currentTemp, setCurrentTemp] = useState(28);
+  const [currentHumidity, setCurrentHumidity] = useState(65);
+
+  const diff = currentTemp - setpoint;
+  let tempStatus = "NORMAL";
+  let fanOn = false;
+  let heaterOn = false;
+  let ruleActive = "Rule #1 Aktif";
+
+  if (diff >= 1) {
+    tempStatus = "PANAS";
+    fanOn = true;
+    heaterOn = false;
+    ruleActive = "Rule #3 Aktif";
+  } else if (diff <= -1) {
+    tempStatus = "DINGIN";
+    fanOn = false;
+    heaterOn = true;
+    ruleActive = "Rule #2 Aktif";
+  }
+
+  const confidence = Math.min(98, Math.max(70, Math.abs(diff) * 8 + 75)).toFixed(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTemp((prev) => {
+        if (fanOn) return Math.max(prev - 0.5, 20);
+        if (heaterOn) return Math.min(prev + 0.5, 45);
+        return prev + (Math.random() - 0.5) * 0.4;
+      });
+      setCurrentHumidity((prev) => 
+        Math.min(100, Math.max(40, prev + ((Math.random() - 0.5) * 2)))
+      );
+    }, 2000);
+    return () => clearInterval(timer);
+  }, [fanOn, heaterOn]);
 
   const decrement = () => setSetpoint((p) => Math.max(0, p - 1));
   const increment = () => setSetpoint((p) => Math.min(50, p + 1));
@@ -103,12 +139,14 @@ export function DashboardScreen() {
             <div>
               <p style={{ fontSize: "13px", fontWeight: 400, opacity: 0.8, marginBottom: "4px" }}>Suhu Real-time</p>
               <div style={{ display: "flex", alignItems: "flex-start", gap: "4px" }}>
-                <span style={{ fontSize: "64px", fontWeight: 800, lineHeight: 1, letterSpacing: "-2px" }}>28</span>
+                <span style={{ fontSize: "64px", fontWeight: 800, lineHeight: 1, letterSpacing: "-2px" }}>
+                  {currentTemp.toFixed(1)}
+                </span>
                 <span style={{ fontSize: "28px", fontWeight: 600, marginTop: "10px", opacity: 0.9 }}>°C</span>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: "6px", marginTop: "6px" }}>
                 <Droplets size={15} style={{ opacity: 0.8 }} />
-                <span style={{ fontSize: "14px", fontWeight: 500, opacity: 0.85 }}>Kelembaban 65%</span>
+                <span style={{ fontSize: "14px", fontWeight: 500, opacity: 0.85 }}>Kelembaban {currentHumidity.toFixed(1)}%</span>
               </div>
             </div>
 
@@ -185,13 +223,17 @@ export function DashboardScreen() {
             </div>
             <span style={{ fontSize: "15px", fontWeight: 700, color: "#1E3A8A" }}>Transparansi Fuzzy Logic</span>
           </div>
-          <p style={{ fontSize: "13.5px", fontWeight: 400, color: "#1E40AF", lineHeight: "1.55" }}>
+          <p style={{ fontSize: "13.5px", fontWeight: 400, color: "#1E40AF", lineHeight: "1.55", transition: "all 0.3s" }}>
             Sensor membaca suhu{" "}
-            <span style={{ fontWeight: 700, background: "#BFDBFE", borderRadius: "4px", padding: "1px 5px" }}>PANAS</span>{" "}
+            <span style={{ fontWeight: 700, background: "#BFDBFE", borderRadius: "4px", padding: "1px 5px" }}>
+              {tempStatus}
+            </span>{" "}
             dan kelembaban{" "}
-            <span style={{ fontWeight: 700, background: "#BFDBFE", borderRadius: "4px", padding: "1px 5px" }}>NORMAL</span>.
+            <span style={{ fontWeight: 700, background: "#BFDBFE", borderRadius: "4px", padding: "1px 5px" }}>
+              NORMAL
+            </span>.
             <br />
-            Keputusan inferensi: <strong>Kipas ON</strong>, Pemanas OFF.
+            Keputusan inferensi: <strong>Kipas {fanOn ? "ON" : "OFF"}</strong>, <strong>Pemanas {heaterOn ? "ON" : "OFF"}</strong>.
           </p>
           <div
             style={{
@@ -211,7 +253,7 @@ export function DashboardScreen() {
                 fontWeight: 600,
               }}
             >
-              Rule #3 Aktif
+              {ruleActive}
             </span>
             <span
               style={{
@@ -223,7 +265,7 @@ export function DashboardScreen() {
                 fontWeight: 600,
               }}
             >
-              Confidence: 87%
+              Confidence: {confidence}%
             </span>
           </div>
         </div>
@@ -297,7 +339,7 @@ export function DashboardScreen() {
         <div>
           <p style={{ fontSize: "15px", fontWeight: 700, color: "#1E293B", marginBottom: "10px" }}>Status Aktuator</p>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-            {/* Fan Card - ON */}
+            {/* Fan Card */}
             <div
               style={{
                 background: "#FFFFFF",
@@ -308,41 +350,44 @@ export function DashboardScreen() {
                 flexDirection: "column",
                 alignItems: "center",
                 gap: "10px",
-                border: "1.5px solid #D1FAE5",
+                border: `1.5px solid ${fanOn ? "#D1FAE5" : "#F1F5F9"}`,
+                transition: "border-color 0.3s",
               }}
             >
               <div
                 style={{
-                  background: "#F0FDF4",
+                  background: fanOn ? "#F0FDF4" : "#F8F9FA",
                   borderRadius: "14px",
                   width: "52px",
                   height: "52px",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  transition: "background 0.3s",
                 }}
               >
-                <Wind size={26} color="#22C55E" strokeWidth={1.8} />
+                <Wind size={26} color={fanOn ? "#22C55E" : "#64748B"} strokeWidth={1.8} />
               </div>
               <span style={{ fontSize: "13px", fontWeight: 500, color: "#475569", textAlign: "center" }}>
                 Kipas Sirkulasi
               </span>
               <span
                 style={{
-                  background: "#22C55E",
+                  background: fanOn ? "#22C55E" : "#64748B",
                   color: "white",
                   borderRadius: "20px",
                   padding: "4px 16px",
                   fontSize: "12px",
                   fontWeight: 700,
-                  boxShadow: "0px 2px 6px rgba(34,197,94,0.3)",
+                  boxShadow: fanOn ? "0px 2px 6px rgba(34,197,94,0.3)" : "none",
+                  transition: "all 0.3s",
                 }}
               >
-                ON
+                {fanOn ? "ON" : "OFF"}
               </span>
             </div>
 
-            {/* Heater Card - OFF */}
+            {/* Heater Card */}
             <div
               style={{
                 background: "#FFFFFF",
@@ -353,36 +398,40 @@ export function DashboardScreen() {
                 flexDirection: "column",
                 alignItems: "center",
                 gap: "10px",
-                border: "1.5px solid #F1F5F9",
+                border: `1.5px solid ${heaterOn ? "#FFEDD5" : "#F1F5F9"}`,
+                transition: "border-color 0.3s",
               }}
             >
               <div
                 style={{
-                  background: "#F8F9FA",
+                  background: heaterOn ? "#FFF7ED" : "#F8F9FA",
                   borderRadius: "14px",
                   width: "52px",
                   height: "52px",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  transition: "background 0.3s",
                 }}
               >
-                <Flame size={26} color="#64748B" strokeWidth={1.8} />
+                <Flame size={26} color={heaterOn ? "#F97316" : "#64748B"} strokeWidth={1.8} />
               </div>
               <span style={{ fontSize: "13px", fontWeight: 500, color: "#475569", textAlign: "center" }}>
                 Pemanas
               </span>
               <span
                 style={{
-                  background: "#64748B",
+                  background: heaterOn ? "#F97316" : "#64748B",
                   color: "white",
                   borderRadius: "20px",
                   padding: "4px 16px",
                   fontSize: "12px",
                   fontWeight: 700,
+                  boxShadow: heaterOn ? "0px 2px 6px rgba(249,115,22,0.3)" : "none",
+                  transition: "all 0.3s",
                 }}
               >
-                OFF
+                {heaterOn ? "ON" : "OFF"}
               </span>
             </div>
           </div>

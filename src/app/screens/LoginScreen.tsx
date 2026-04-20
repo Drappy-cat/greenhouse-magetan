@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router";
-import { Eye, EyeOff, QrCode, KeyRound, RefreshCw, CheckCircle2, Smartphone, Wifi, ShieldCheck } from "lucide-react";
+import { Eye, EyeOff, QrCode, KeyRound, RefreshCw, CheckCircle2, Smartphone, Wifi, ShieldCheck, Moon, Sun } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { motion, AnimatePresence } from "motion/react";
+import { useTheme } from "next-themes";
 
 type LoginTab = "password" | "qrcode";
 type QrStatus = "waiting" | "scanning" | "scanned" | "success";
@@ -15,6 +16,8 @@ const QR_EXPIRE_SEC = 60;
 
 export function LoginScreen() {
   const navigate = useNavigate();
+  const { theme, setTheme } = useTheme();
+  const isDark = theme === "dark";
   const [activeTab, setActiveTab] = useState<LoginTab>("password");
 
   /* ── Password form state ── */
@@ -40,8 +43,31 @@ export function LoginScreen() {
         justifyContent: "space-between",
         padding: "0 24px 36px",
         boxSizing: "border-box",
+        position: "relative",
       }}
     >
+      <button
+        onClick={() => setTheme(isDark ? "light" : "dark")}
+        style={{
+          position: "absolute",
+          top: "24px",
+          right: "24px",
+          background: "#FFFFFF",
+          border: "1px solid #E2E8F0",
+          borderRadius: "50%",
+          width: "40px",
+          height: "40px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          cursor: "pointer",
+          boxShadow: "0px 2px 8px rgba(0,0,0,0.05)",
+          color: "#475569",
+          zIndex: 10,
+        }}
+      >
+        {isDark ? <Sun size={20} /> : <Moon size={20} />}
+      </button>
       {/* ── TOP SECTION: Logo & Branding ── */}
       <div
         style={{

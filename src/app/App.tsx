@@ -1,9 +1,11 @@
 import { RouterProvider } from "react-router";
+import { ThemeProvider } from "next-themes";
 import { router } from "./routes";
 
 export default function App() {
   return (
-    <div
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+      <div
       style={{
         minHeight: "100vh",
         background: "#E5E7EB",
@@ -28,5 +30,6 @@ export default function App() {
         <RouterProvider router={router} />
       </div>
     </div>
+    </ThemeProvider>
   );
 }
