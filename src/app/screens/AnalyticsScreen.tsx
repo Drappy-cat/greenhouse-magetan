@@ -8,7 +8,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { Download, Wind, Flame, AlertTriangle } from "lucide-react";
+import { Download, Wind, Flame, AlertTriangle, Calendar, X } from "lucide-react";
 import { BottomNav } from "../components/BottomNav";
 
 const chartData = [
@@ -51,7 +51,14 @@ const activityLog = [
   },
 ];
 
-const filters = ["Hari Ini", "7 Hari", "30 Hari"];
+const filters = ["Hari Ini", "7 Hari", "30 Hari", "Lainnya"];
+const activityFilters = ["Semua", "Peringatan", "Sukses", "Info"];
+const activityFilterColors: { [key: string]: { border: string, bg: string, text: string } } = {
+  "Semua": { border: "#E2E8F0", bg: "#FFFFFF", text: "#64748B" },
+  "Peringatan": { border: "#F97316", bg: "#FFF7ED", text: "#F97316" },
+  "Sukses": { border: "#22C55E", bg: "#F0FDF4", text: "#22C55E" },
+  "Info": { border: "#64748B", bg: "#F8F9FA", text: "#64748B" },
+};
 
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
@@ -91,6 +98,34 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 
 export function AnalyticsScreen() {
   const [activeFilter, setActiveFilter] = useState("Hari Ini");
+  const [activeActivityFilter, setActiveActivityFilter] = useState("Semua");
+  const [isDateModalOpen, setDateModalOpen] = useState(false);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [showSuhu, setShowSuhu] = useState(true);
+  const [showKelembaban, setShowKelembaban] = useState(true);
+
+  const handleFilterClick = (filter: string) => {
+    if (filter === "Lainnya") {
+      setDateModalOpen(true);
+    } else {
+      setActiveFilter(filter);
+    }
+  };
+
+  const handleApplyDateRange = () => {
+    console.log("Date range applied:", { startDate, endDate });
+    setActiveFilter(`Dari ${startDate} ke ${endDate}`);
+    setDateModalOpen(false);
+  };
+
+  const filteredActivityLog = activityLog.filter(item => {
+    if (activeActivityFilter === "Semua") return true;
+    if (activeActivityFilter === "Peringatan") return item.type === "warning";
+    if (activeActivityFilter === "Sukses") return item.type === "success";
+    if (activeActivityFilter === "Info") return item.type === "info";
+    return false;
+  });
 
   return (
     <div
@@ -119,7 +154,7 @@ export function AnalyticsScreen() {
           {filters.map((f) => (
             <button
               key={f}
-              onClick={() => setActiveFilter(f)}
+              onClick={() => handleFilterClick(f)}
               style={{
                 padding: "8px 18px",
                 borderRadius: "20px",
@@ -152,12 +187,34 @@ export function AnalyticsScreen() {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
             <span style={{ fontSize: "15px", fontWeight: 700, color: "#1E293B" }}>Grafik Sensor</span>
             <div style={{ display: "flex", gap: "12px" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                <span style={{ width: "10px", height: "3px", background: "#F97316", borderRadius: "2px", display: "inline-block" }} />
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "5px", cursor: "pointer" }}
+                onClick={() => setShowSuhu(!showSuhu)}
+              >
+                <span
+                  style={{
+                    width: "10px",
+                    height: "3px",
+                    background: showSuhu ? "#F97316" : "#E2E8F0",
+                    borderRadius: "2px",
+                    display: "inline-block",
+                  }}
+                />
                 <span style={{ fontSize: "11px", color: "#64748B", fontWeight: 500 }}>Suhu</span>
               </div>
-              <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                <span style={{ width: "10px", height: "3px", background: "#3B82F6", borderRadius: "2px", display: "inline-block" }} />
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "5px", cursor: "pointer" }}
+                onClick={() => setShowKelembaban(!showKelembaban)}
+              >
+                <span
+                  style={{
+                    width: "10px",
+                    height: "3px",
+                    background: showKelembaban ? "#3B82F6" : "#E2E8F0",
+                    borderRadius: "2px",
+                    display: "inline-block",
+                  }}
+                />
                 <span style={{ fontSize: "11px", color: "#64748B", fontWeight: 500 }}>Kelembaban</span>
               </div>
             </div>
@@ -188,26 +245,30 @@ export function AnalyticsScreen() {
                 tickLine={false}
               />
               <Tooltip content={<CustomTooltip />} />
-              <Area
-                type="monotone"
-                dataKey="suhu"
-                name="suhu"
-                stroke="#F97316"
-                strokeWidth={2.5}
-                fill="url(#colorSuhu)"
-                dot={false}
-                activeDot={{ r: 5, strokeWidth: 2 }}
-              />
-              <Area
-                type="monotone"
-                dataKey="kelembaban"
-                name="kelembaban"
-                stroke="#3B82F6"
-                strokeWidth={2.5}
-                fill="url(#colorKelembaban)"
-                dot={false}
-                activeDot={{ r: 5, strokeWidth: 2 }}
-              />
+              {showSuhu && (
+                <Area
+                  type="monotone"
+                  dataKey="suhu"
+                  name="suhu"
+                  stroke="#F97316"
+                  strokeWidth={2.5}
+                  fill="url(#colorSuhu)"
+                  dot={false}
+                  activeDot={{ r: 5, strokeWidth: 2 }}
+                />
+              )}
+              {showKelembaban && (
+                <Area
+                  type="monotone"
+                  dataKey="kelembaban"
+                  name="kelembaban"
+                  stroke="#3B82F6"
+                  strokeWidth={2.5}
+                  fill="url(#colorKelembaban)"
+                  dot={false}
+                  activeDot={{ r: 5, strokeWidth: 2 }}
+                />
+              )}
             </AreaChart>
           </ResponsiveContainer>
         </div>
@@ -237,11 +298,36 @@ export function AnalyticsScreen() {
 
         {/* Activity Log */}
         <div>
-          <p style={{ fontSize: "15px", fontWeight: 700, color: "#1E293B", marginBottom: "12px" }}>
-            Aktivitas Terakhir
-          </p>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+            <p style={{ fontSize: "15px", fontWeight: 700, color: "#1E293B" }}>
+              Aktivitas Terakhir
+            </p>
+            <div style={{ display: "flex", gap: "8px", overflowX: "auto", paddingBottom: "4px" }}>
+              {activityFilters.map((f) => (
+                <button
+                  key={f}
+                  onClick={() => setActiveActivityFilter(f)}
+                  style={{
+                    padding: "6px 14px",
+                    borderRadius: "16px",
+                    border: `1.5px solid ${activeActivityFilter === f ? activityFilterColors[f].border : '#E2E8F0'}`,
+                    background: activeActivityFilter === f ? activityFilterColors[f].bg : '#FFFFFF',
+                    color: activeActivityFilter === f ? activityFilterColors[f].text : '#64748B',
+                    fontSize: "12px",
+                    fontWeight: 600,
+                    cursor: "pointer",
+                    whiteSpace: "nowrap",
+                    fontFamily: "'Inter', sans-serif",
+                    transition: "all 0.2s",
+                  }}
+                >
+                  {f}
+                </button>
+              ))}
+            </div>
+          </div>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            {activityLog.map((item) => {
+            {filteredActivityLog.map((item) => {
               const Icon = item.icon;
               return (
                 <div
@@ -284,6 +370,93 @@ export function AnalyticsScreen() {
           </div>
         </div>
       </div>
+
+      {/* Date Range Modal */}
+      {isDateModalOpen && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(0, 0, 0, 0.5)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 100,
+        }}>
+          <div style={{
+            background: 'white',
+            borderRadius: '16px',
+            padding: '24px',
+            width: 'calc(100% - 40px)',
+            maxWidth: '340px',
+            fontFamily: "'Inter', sans-serif",
+            boxShadow: "0px 8px 24px rgba(0,0,0,0.15)",
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+              <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 700, color: '#1E293B' }}>Pilih Rentang Tanggal</h3>
+              <button onClick={() => setDateModalOpen(false)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: '4px' }}>
+                <X size={20} color="#64748B" />
+              </button>
+            </div>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div>
+                <label style={{ fontSize: '13px', fontWeight: 500, color: '#475569', display: 'block', marginBottom: '6px' }}>Tanggal Mulai</label>
+                <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} style={{
+                  width: '100%',
+                  padding: '10px 12px',
+                  borderRadius: '8px',
+                  border: '1.5px solid #E2E8F0',
+                  fontSize: '14px',
+                  fontFamily: "'Inter', sans-serif",
+                }}/>
+              </div>
+              <div>
+                <label style={{ fontSize: '13px', fontWeight: 500, color: '#475569', display: 'block', marginBottom: '6px' }}>Tanggal Selesai</label>
+                <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} style={{
+                  width: '100%',
+                  padding: '10px 12px',
+                  borderRadius: '8px',
+                  border: '1.5px solid #E2E8F0',
+                  fontSize: '14px',
+                  fontFamily: "'Inter', sans-serif",
+                }}/>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: '12px', marginTop: '24px' }}>
+              <button onClick={() => setDateModalOpen(false)} style={{
+                flex: 1,
+                padding: '12px',
+                borderRadius: '12px',
+                border: '1.5px solid #E2E8F0',
+                background: '#FFFFFF',
+                color: '#475569',
+                fontSize: '14px',
+                fontWeight: 600,
+                cursor: 'pointer',
+              }}>
+                Batal
+              </button>
+              <button onClick={handleApplyDateRange} style={{
+                flex: 1,
+                padding: '12px',
+                borderRadius: '12px',
+                border: 'none',
+                background: '#3B82F6',
+                color: 'white',
+                fontSize: '14px',
+                fontWeight: 600,
+                cursor: 'pointer',
+              }}>
+                Terapkan
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* FAB - Download */}
       <button
