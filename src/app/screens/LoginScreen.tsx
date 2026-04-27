@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router";
-import { Eye, EyeOff, QrCode, KeyRound, RefreshCw, CheckCircle2, Smartphone, Wifi, ShieldCheck, Moon, Sun } from "lucide-react";
+import { Eye, EyeOff, QrCode, KeyRound, RefreshCw, CheckCircle2, Smartphone, Wifi, ShieldCheck, Moon, Sun, AlertCircle, X } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { motion, AnimatePresence } from "motion/react";
-import { useTheme } from "next-themes";
+import { useThemeTransition } from "../hooks/useThemeTransition";
 
 type LoginTab = "password" | "qrcode";
 type QrStatus = "waiting" | "scanning" | "scanned" | "success";
@@ -16,7 +16,7 @@ const QR_EXPIRE_SEC = 60;
 
 export function LoginScreen() {
   const navigate = useNavigate();
-  const { theme, setTheme } = useTheme();
+  const { theme, toggleTheme } = useThemeTransition();
   const isDark = theme === "dark";
   const [activeTab, setActiveTab] = useState<LoginTab>("password");
 
@@ -25,10 +25,32 @@ export function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => setError(null), 3500);
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
 
   const handleLogin = () => {
+    setError(null);
+    if (!email || !password) {
+      setError("Email dan kata sandi tidak boleh kosong!");
+      return;
+    }
+    
     setLoading(true);
-    setTimeout(() => { setLoading(false); navigate("/dashboard"); }, 1000);
+    setTimeout(() => { 
+      setLoading(false); 
+      // Simulasi validasi login
+      if (email === "admin" && password === "admin") {
+        navigate("/dashboard"); 
+      } else {
+        setError("Email atau kata sandi salah! Coba admin / admin");
+      }
+    }, 1200);
   };
 
   return (
@@ -47,7 +69,7 @@ export function LoginScreen() {
       }}
     >
       <button
-        onClick={() => setTheme(isDark ? "light" : "dark")}
+        onClick={(e) => toggleTheme(e)}
         style={{
           position: "absolute",
           top: "24px",
@@ -68,6 +90,49 @@ export function LoginScreen() {
       >
         {isDark ? <Sun size={20} /> : <Moon size={20} />}
       </button>
+
+      {/* ── ERROR NOTIFICATION TOAST ── */}
+      <AnimatePresence>
+        {error && (
+          <motion.div
+            initial={{ opacity: 0, y: -40, x: "-50%" }}
+            animate={{ opacity: 1, y: 0, x: "-50%" }}
+            exit={{ opacity: 0, y: -40, x: "-50%" }}
+            style={{
+              position: "absolute",
+              top: "24px",
+              left: "50%",
+              background: "#FEF2F2",
+              border: "1px solid #FCA5A5",
+              borderRadius: "14px",
+              padding: "12px 16px",
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              boxShadow: "0px 6px 16px rgba(239, 68, 68, 0.15)",
+              zIndex: 50,
+              width: "max-content",
+              maxWidth: "90%",
+            }}
+          >
+            <AlertCircle size={20} color="#EF4444" />
+            <span style={{ fontSize: "13px", fontWeight: 600, color: "#991B1B", fontFamily: "'Inter', sans-serif" }}>
+              {error}
+            </span>
+            <button
+              onClick={() => setError(null)}
+              style={{
+                background: "none", border: "none", cursor: "pointer",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                padding: "2px", color: "#EF4444"
+              }}
+            >
+              <X size={16} />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* ── TOP SECTION: Logo & Branding ── */}
       <div
         style={{

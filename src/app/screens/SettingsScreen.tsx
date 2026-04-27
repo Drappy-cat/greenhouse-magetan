@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { useTheme } from "next-themes";
+import { useThemeTransition } from "../hooks/useThemeTransition";
 import { User, Moon, Cpu, Thermometer, Droplets, LogOut, ChevronRight, Wifi, Shield } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { BottomNav } from "../components/BottomNav";
 
 export function SettingsScreen() {
   const navigate = useNavigate();
-  const { theme, setTheme } = useTheme();
+  const { theme, toggleTheme } = useThemeTransition();
   const darkMode = theme === "dark";
   const [simEnabled, setSimEnabled] = useState(true);
   const [simTemp, setSimTemp] = useState(28);
@@ -17,9 +17,9 @@ export function SettingsScreen() {
     navigate("/login");
   };
 
-  const Toggle = ({ value, onChange }: { value: boolean; onChange: () => void; }) => (
+  const Toggle = ({ value, onChange }: { value: boolean; onChange: (e: React.MouseEvent) => void; }) => (
     <motion.div
-      onClick={onChange}
+      onClick={(e) => onChange(e as any)}
       animate={{
         background: value ? "#22C55E" : "#CBD5E1",
         boxShadow: value ? "0px 2px 8px rgba(34,197,94,0.35)" : "none"
@@ -65,7 +65,16 @@ export function SettingsScreen() {
 
       <div style={{ padding: "20px 16px", display: "flex", flexDirection: "column", gap: "16px" }}>
         {/* Profile Header */}
-        <div
+        <motion.div
+          whileHover={{
+            scale: 1.05,
+            boxShadow: "0px 12px 36px rgba(59, 130, 246, 0.8)",
+          }}
+          transition={{
+            type: "spring",
+            stiffness: 300,
+            damping: 20,
+          }}
           style={{
             background: "linear-gradient(135deg, #1D4ED8 0%, #3B82F6 100%)",
             borderRadius: "20px",
@@ -75,6 +84,7 @@ export function SettingsScreen() {
             alignItems: "center",
             gap: "12px",
             boxShadow: "0px 6px 20px rgba(59,130,246,0.3)",
+            cursor: "pointer",
           }}
         >
           {/* Avatar */}
@@ -147,7 +157,7 @@ export function SettingsScreen() {
               Admin
             </span>
           </div>
-        </div>
+        </motion.div>
 
         {/* Preferensi Group */}
         <div>
@@ -191,7 +201,7 @@ export function SettingsScreen() {
                   <p style={{ fontSize: "12px", color: "#94A3B8" }}>Tampilan gelap untuk mata</p>
                 </div>
               </div>
-              <Toggle value={darkMode} onChange={() => setTheme(darkMode ? "light" : "dark")} />
+              <Toggle value={darkMode} onChange={(e) => toggleTheme(e)} />
             </div>
 
             {/* Notifications */}

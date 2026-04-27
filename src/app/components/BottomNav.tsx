@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from "react-router";
 import { Home, BarChart2, Clock, Settings } from "lucide-react";
+import { motion } from "motion/react";
 
 const navItems = [
   { icon: Home, label: "Beranda", path: "/dashboard" },
@@ -35,8 +36,9 @@ export function BottomNav() {
       {navItems.map(({ icon: Icon, label, path }) => {
         const isActive = location.pathname === path;
         return (
-          <button
+          <motion.button
             key={path}
+            whileTap={{ scale: 0.85 }}
             onClick={() => navigate(path)}
             style={{
               display: "flex",
@@ -47,20 +49,38 @@ export function BottomNav() {
               border: "none",
               cursor: "pointer",
               padding: "4px 16px",
-              color: isActive ? "#3B82F6" : "#94A3B8",
-              transition: "color 0.2s ease",
+              position: "relative",
             }}
           >
-            <Icon size={22} strokeWidth={isActive ? 2.5 : 1.8} />
-            <span
+            <motion.div
+              animate={{
+                color: isActive ? "#3B82F6" : "#94A3B8",
+                y: isActive ? -4 : 0,
+                scale: isActive ? 1.15 : 1,
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 400,
+                damping: 15,
+              }}
+            >
+              <Icon size={22} strokeWidth={isActive ? 2.5 : 1.8} />
+            </motion.div>
+            
+            <motion.span
+              animate={{
+                color: isActive ? "#3B82F6" : "#94A3B8",
+                opacity: isActive ? 1 : 0.8,
+              }}
+              transition={{ duration: 0.3 }}
               style={{
                 fontSize: "11px",
                 fontWeight: isActive ? 600 : 400,
               }}
             >
               {label}
-            </span>
-          </button>
+            </motion.span>
+          </motion.button>
         );
       })}
     </div>

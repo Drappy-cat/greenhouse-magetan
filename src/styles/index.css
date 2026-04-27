@@ -3,11 +3,34 @@
 @import './theme.css';
 
 html.dark {
-  filter: invert(0.88) hue-rotate(180deg);
+  filter: invert(1) hue-rotate(180deg);
+  background: #000;
 }
 
 html.dark img, 
 html.dark video,
-html.dark iframe {
-  filter: invert(1) hue-rotate(180deg) contrast(1.15);
+html.dark iframe,
+html.dark .no-invert,
+.dark .no-invert {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* Force dark slate to invert to pure white */
+html.dark [style*="color: #1E293B"],
+html.dark [style*="color: '#1E293B'"],
+html.dark [style*='color: "#1E293B"'] {
+  color: #000000 !important; /* Inverts to #FFFFFF */
+}
+
+/* Custom View Transition for Theme Toggle */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 2;
 }

@@ -299,37 +299,35 @@ export function NotificationScreen() {
       {/* ── Confirm Dialog Overlay ── */}
       <AnimatePresence>
         {showConfirm && (
-          <>
-            <motion.div
-              key="overlay"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setShowConfirm(false)}
-              style={{
-                position: "fixed",
-                inset: 0,
-                background: "rgba(0,0,0,0.45)",
-                zIndex: 200,
-              }}
-            />
+          <motion.div
+            key="overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowConfirm(false)}
+            style={{
+              position: "fixed",
+              inset: 0,
+              background: "rgba(0,0,0,0.45)",
+              zIndex: 200,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             <motion.div
               key="dialog"
               initial={{ opacity: 0, scale: 0.9, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 30 }}
               transition={{ type: "spring", duration: 0.35 }}
+              onClick={(e) => e.stopPropagation()}
               style={{
-                position: "fixed",
-                bottom: "50%",
-                left: "50%",
-                transform: "translate(-50%, 50%)",
                 background: "#FFFFFF",
                 borderRadius: "24px",
                 padding: "28px 24px",
                 width: "calc(100% - 48px)",
                 maxWidth: "360px",
-                zIndex: 201,
                 boxShadow: "0px 20px 50px rgba(0,0,0,0.2)",
                 textAlign: "center",
               }}
@@ -393,7 +391,7 @@ export function NotificationScreen() {
                 </button>
               </div>
             </motion.div>
-          </>
+          </motion.div>
         )}
       </AnimatePresence>
     </div>
