@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { Bell, Wind, Flame, ThermometerSun, Droplets, CloudSun } from "lucide-react";
+import { Bell, Wind, Flame, ThermometerSun, Droplets, CloudSun, Sun, CloudRain, CloudLightning } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
 import { BottomNav } from "../components/BottomNav";
 
 export function DashboardScreen() {
@@ -8,6 +9,7 @@ export function DashboardScreen() {
   const [setpoint, setSetpoint] = useState(25);
   const [currentTemp, setCurrentTemp] = useState(28);
   const [currentHumidity, setCurrentHumidity] = useState(65);
+  const [weather, setWeather] = useState<"sunny" | "cloudy" | "rainy" | "stormy">("cloudy");
 
   const diff = currentTemp - setpoint;
   let tempStatus = "NORMAL";
@@ -39,6 +41,10 @@ export function DashboardScreen() {
       setCurrentHumidity((prev) => 
         Math.min(100, Math.max(40, prev + ((Math.random() - 0.5) * 2)))
       );
+      if (Math.random() > 0.85) {
+        const weathers: ("sunny" | "cloudy" | "rainy" | "stormy")[] = ["sunny", "cloudy", "rainy", "stormy"];
+        setWeather(weathers[Math.floor(Math.random() * weathers.length)]);
+      }
     }, 2000);
     return () => clearInterval(timer);
   }, [fanOn, heaterOn]);
@@ -101,6 +107,7 @@ export function DashboardScreen() {
       <div style={{ padding: "20px 16px", display: "flex", flexDirection: "column", gap: "14px" }}>
         {/* Hero Card - Climate */}
         <div
+          className="no-invert"
           style={{
             background: "linear-gradient(135deg, #1D4ED8 0%, #3B82F6 60%, #60A5FA 100%)",
             borderRadius: "24px",
@@ -160,7 +167,20 @@ export function DashboardScreen() {
                   backdropFilter: "blur(4px)",
                 }}
               >
-                <CloudSun size={40} color="white" strokeWidth={1.5} />
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={weather}
+                    initial={{ opacity: 0, scale: 0.5, rotate: -30 }}
+                    animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                    exit={{ opacity: 0, scale: 0.5, rotate: 30 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  >
+                    {weather === "sunny" && <Sun size={40} color="white" strokeWidth={1.5} />}
+                    {weather === "cloudy" && <CloudSun size={40} color="white" strokeWidth={1.5} />}
+                    {weather === "rainy" && <CloudRain size={40} color="white" strokeWidth={1.5} />}
+                    {weather === "stormy" && <CloudLightning size={40} color="white" strokeWidth={1.5} />}
+                  </motion.div>
+                </AnimatePresence>
               </div>
             </div>
           </div>
@@ -208,6 +228,7 @@ export function DashboardScreen() {
         >
           <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "10px" }}>
             <div
+              className="no-invert"
               style={{
                 background: "#3B82F6",
                 borderRadius: "8px",
@@ -284,7 +305,8 @@ export function DashboardScreen() {
             <span style={{ fontSize: "15px", fontWeight: 700, color: "#1E293B" }}>Atur Target Suhu</span>
           </div>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <button
+            <motion.button
+              whileTap={{ scale: 0.85 }}
               onClick={decrement}
               style={{
                 width: "48px",
@@ -299,11 +321,10 @@ export function DashboardScreen() {
                 fontSize: "24px",
                 fontWeight: 300,
                 color: "#64748B",
-                transition: "background 0.15s",
               }}
             >
               −
-            </button>
+            </motion.button>
             <div style={{ textAlign: "center" }}>
               <span style={{ fontSize: "48px", fontWeight: 800, color: "#1E293B", letterSpacing: "-2px" }}>
                 {setpoint}
@@ -311,7 +332,8 @@ export function DashboardScreen() {
               <span style={{ fontSize: "22px", fontWeight: 600, color: "#64748B" }}>°C</span>
               <p style={{ fontSize: "12px", color: "#94A3B8", marginTop: "2px" }}>Target Setpoint</p>
             </div>
-            <button
+            <motion.button
+              whileTap={{ scale: 0.85 }}
               onClick={increment}
               style={{
                 width: "48px",
@@ -327,11 +349,10 @@ export function DashboardScreen() {
                 fontWeight: 300,
                 color: "white",
                 boxShadow: "0px 4px 10px rgba(59,130,246,0.35)",
-                transition: "background 0.15s",
               }}
             >
               +
-            </button>
+            </motion.button>
           </div>
         </div>
 
@@ -355,6 +376,7 @@ export function DashboardScreen() {
               }}
             >
               <div
+                className="no-invert"
                 style={{
                   background: fanOn ? "#F0FDF4" : "#F8F9FA",
                   borderRadius: "14px",
@@ -372,6 +394,7 @@ export function DashboardScreen() {
                 Kipas Sirkulasi
               </span>
               <span
+                className="no-invert"
                 style={{
                   background: fanOn ? "#22C55E" : "#64748B",
                   color: "white",
@@ -403,6 +426,7 @@ export function DashboardScreen() {
               }}
             >
               <div
+                className="no-invert"
                 style={{
                   background: heaterOn ? "#FFF7ED" : "#F8F9FA",
                   borderRadius: "14px",
@@ -420,6 +444,7 @@ export function DashboardScreen() {
                 Pemanas
               </span>
               <span
+                className="no-invert"
                 style={{
                   background: heaterOn ? "#F97316" : "#64748B",
                   color: "white",

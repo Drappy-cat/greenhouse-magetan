@@ -8,7 +8,8 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { Download, Wind, Flame, AlertTriangle, Calendar, X } from "lucide-react";
+import { Download, Wind, Flame, AlertTriangle, Calendar, X, CheckCircle2 } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
 import { BottomNav } from "../components/BottomNav";
 
 const chartData = [
@@ -104,6 +105,28 @@ export function AnalyticsScreen() {
   const [endDate, setEndDate] = useState("");
   const [showSuhu, setShowSuhu] = useState(true);
   const [showKelembaban, setShowKelembaban] = useState(true);
+  const [exportSuccess, setExportSuccess] = useState(false);
+
+  const handleExportCSV = () => {
+    let csvContent = "Waktu,Suhu (°C),Kelembaban (%)\n";
+    chartData.forEach(row => {
+      csvContent += `${row.time},${row.suhu},${row.kelembaban}\n`;
+    });
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", `Riwayat_Sensor_${activeFilter.replace(/\s+/g, "_")}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    setExportSuccess(true);
+    setTimeout(() => setExportSuccess(false), 3000);
+  };
 
   const handleFilterClick = (filter: string) => {
     if (filter === "Lainnya") {
@@ -154,6 +177,7 @@ export function AnalyticsScreen() {
           {filters.map((f) => (
             <button
               key={f}
+              className="no-invert"
               onClick={() => handleFilterClick(f)}
               style={{
                 padding: "8px 18px",
@@ -306,6 +330,7 @@ export function AnalyticsScreen() {
               {activityFilters.map((f) => (
                 <button
                   key={f}
+                  className="no-invert"
                   onClick={() => setActiveActivityFilter(f)}
                   style={{
                     padding: "6px 14px",
@@ -343,6 +368,7 @@ export function AnalyticsScreen() {
                   }}
                 >
                   <div
+                    className="no-invert"
                     style={{
                       background: item.iconBg,
                       borderRadius: "50%",
@@ -458,8 +484,41 @@ export function AnalyticsScreen() {
         </div>
       )}
 
+      {/* Export Success Toast */}
+      <AnimatePresence>
+        {exportSuccess && (
+          <motion.div
+            className="no-invert"
+            initial={{ opacity: 0, y: 50, x: "-50%" }}
+            animate={{ opacity: 1, y: 0, x: "-50%" }}
+            exit={{ opacity: 0, y: 50, x: "-50%" }}
+            style={{
+              position: "fixed",
+              bottom: "160px",
+              left: "50%",
+              background: "#F0FDF4",
+              border: "1px solid #BBF7D0",
+              borderRadius: "12px",
+              padding: "12px 20px",
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              boxShadow: "0px 8px 24px rgba(34, 197, 94, 0.2)",
+              zIndex: 100,
+              width: "max-content",
+            }}
+          >
+            <CheckCircle2 size={20} color="#16A34A" />
+            <span style={{ fontSize: "13px", fontWeight: 700, color: "#15803D" }}>Berhasil mengunduh CSV!</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* FAB - Download */}
-      <button
+      <motion.button
+        className="no-invert"
+        whileTap={{ scale: 0.9 }}
+        onClick={handleExportCSV}
         style={{
           position: "fixed",
           bottom: "90px",
@@ -478,7 +537,7 @@ export function AnalyticsScreen() {
         }}
       >
         <Download size={22} color="white" strokeWidth={2} />
-      </button>
+      </motion.button>
 
       <BottomNav />
     </div>
