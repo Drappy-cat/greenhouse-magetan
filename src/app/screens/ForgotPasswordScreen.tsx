@@ -244,7 +244,7 @@ function EmailStep({ onNext }: { onNext: () => void }) {
           display: "flex",
           gap: "12px",
           alignItems: "flex-start",
-        }}W
+        }}W                                                                 
       >
         <div
           style={{
