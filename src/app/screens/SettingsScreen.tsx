@@ -34,7 +34,7 @@ export function SettingsScreen() {
     <motion.div
       onClick={(e) => onChange(e as any)}
       animate={{
-        background: value ? "#22C55E" : "#CBD5E1",
+        background: value ? "#22C55E" : "var(--border-strong)",
         boxShadow: value ? "0px 2px 8px rgba(34,197,94,0.35)" : "none"
       }}
       initial={false}
@@ -60,7 +60,7 @@ export function SettingsScreen() {
     <div
       style={{
         minHeight: "100vh",
-        background: "#F8F9FA",
+        background: "var(--bg-app)",
         fontFamily: "'Inter', sans-serif",
         paddingBottom: "80px",
       }}
@@ -69,11 +69,11 @@ export function SettingsScreen() {
       <div
         style={{
           padding: "56px 20px 16px",
-          background: "#FFFFFF",
+          background: "var(--bg-card)",
           boxShadow: "0px 1px 4px rgba(0,0,0,0.04)",
         }}
       >
-        <span style={{ fontSize: "20px", fontWeight: 700, color: "#1E293B" }}>Profil & Pengaturan</span>
+        <span style={{ fontSize: "20px", fontWeight: 700, color: "var(--text-primary)" }}>Profil & Pengaturan</span>
       </div>
 
       <div style={{ padding: "20px 16px", display: "flex", flexDirection: "column", gap: "16px" }}>
@@ -174,12 +174,12 @@ export function SettingsScreen() {
 
         {/* Preferensi Group */}
         <div>
-          <p style={{ fontSize: "12px", fontWeight: 700, color: "#94A3B8", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.8px" }}>
+          <p style={{ fontSize: "12px", fontWeight: 700, color: "var(--icon-muted)", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.8px" }}>
             Preferensi
           </p>
           <div
             style={{
-              background: "#FFFFFF",
+              background: "var(--bg-card)",
               borderRadius: "16px",
               overflow: "hidden",
               boxShadow: "0px 2px 8px rgba(0,0,0,0.04)",
@@ -192,13 +192,13 @@ export function SettingsScreen() {
                 alignItems: "center",
                 justifyContent: "space-between",
                 padding: "16px 18px",
-                borderBottom: "1px solid #F1F5F9",
+                borderBottom: "1px solid var(--bg-hover)",
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                 <div
                   style={{
-                    background: "#F1F5F9",
+                    background: "var(--bg-hover)",
                     borderRadius: "10px",
                     width: "36px",
                     height: "36px",
@@ -210,8 +210,8 @@ export function SettingsScreen() {
                   <Moon size={18} color="#6366F1" strokeWidth={2} />
                 </div>
                 <div>
-                  <p style={{ fontSize: "14px", fontWeight: 600, color: "#1E293B" }}>Mode Gelap</p>
-                  <p style={{ fontSize: "12px", color: "#94A3B8" }}>Tampilan gelap untuk mata</p>
+                  <p style={{ fontSize: "14px", fontWeight: 600, color: "var(--text-primary)" }}>Mode Gelap</p>
+                  <p style={{ fontSize: "12px", color: "var(--icon-muted)" }}>Tampilan gelap untuk mata</p>
                 </div>
               </div>
               <Toggle value={darkMode} onChange={(e) => toggleTheme(e)} />
@@ -241,23 +241,23 @@ export function SettingsScreen() {
                   <span style={{ fontSize: "16px" }}>🔔</span>
                 </div>
                 <div>
-                  <p style={{ fontSize: "14px", fontWeight: 600, color: "#1E293B" }}>Notifikasi Peringatan</p>
-                  <p style={{ fontSize: "12px", color: "#94A3B8" }}>Alert kondisi kritis</p>
+                  <p style={{ fontSize: "14px", fontWeight: 600, color: "var(--text-primary)" }}>Notifikasi Peringatan</p>
+                  <p style={{ fontSize: "12px", color: "var(--icon-muted)" }}>Alert kondisi kritis</p>
                 </div>
               </div>
-              <ChevronRight size={16} color="#CBD5E1" />
+              <ChevronRight size={16} color="var(--border-strong)" />
             </div>
           </div>
         </div>
 
         {/* Developer Mode Group */}
         <div>
-          <p style={{ fontSize: "12px", fontWeight: 700, color: "#94A3B8", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.8px" }}>
+          <p style={{ fontSize: "12px", fontWeight: 700, color: "var(--icon-muted)", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.8px" }}>
             Mode Pengembang
           </p>
           <div
             style={{
-              background: "#FFFFFF",
+              background: "var(--bg-card)",
               borderRadius: "16px",
               padding: "18px",
               boxShadow: "0px 2px 8px rgba(0,0,0,0.04)",
@@ -271,7 +271,7 @@ export function SettingsScreen() {
               <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                 <div
                   style={{
-                    background: simEnabled ? "#EFF6FF" : "#F1F5F9",
+                    background: simEnabled ? "var(--bg-primary-light)" : "var(--bg-hover)",
                     borderRadius: "10px",
                     width: "36px",
                     height: "36px",
@@ -281,11 +281,11 @@ export function SettingsScreen() {
                     transition: "background 0.3s",
                   }}
                 >
-                  <Cpu size={18} color={simEnabled ? "#3B82F6" : "#94A3B8"} strokeWidth={2} />
+                  <Cpu size={18} color={simEnabled ? "#3B82F6" : "var(--icon-muted)"} strokeWidth={2} />
                 </div>
                 <div>
-                  <p style={{ fontSize: "14px", fontWeight: 600, color: "#1E293B" }}>Aktifkan Simulasi Sensor</p>
-                  <p style={{ fontSize: "12px", color: "#94A3B8" }}>Override data sensor nyata</p>
+                  <p style={{ fontSize: "14px", fontWeight: 600, color: "var(--text-primary)" }}>Aktifkan Simulasi Sensor</p>
+                  <p style={{ fontSize: "12px", color: "var(--icon-muted)" }}>Override data sensor nyata</p>
                 </div>
               </div>
               <Toggle value={simEnabled} onChange={() => setSimEnabled(!simEnabled)} />
@@ -303,7 +303,7 @@ export function SettingsScreen() {
                   <div
                     style={{
                       height: "1px",
-                      background: "#F1F5F9",
+                      background: "var(--bg-hover)",
                       margin: "0 -4px",
                     }}
                   />
@@ -313,7 +313,7 @@ export function SettingsScreen() {
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
                       <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                         <Thermometer size={16} color="#F97316" strokeWidth={2} />
-                        <span style={{ fontSize: "13px", fontWeight: 600, color: "#1E293B" }}>
+                        <span style={{ fontSize: "13px", fontWeight: 600, color: "var(--text-primary)" }}>
                           Manipulasi Suhu
                         </span>
                       </div>
@@ -344,8 +344,8 @@ export function SettingsScreen() {
                       }}
                     />
                     <div style={{ display: "flex", justifyContent: "space-between", marginTop: "4px" }}>
-                      <span style={{ fontSize: "11px", color: "#CBD5E1" }}>0°C</span>
-                      <span style={{ fontSize: "11px", color: "#CBD5E1" }}>50°C</span>
+                      <span style={{ fontSize: "11px", color: "var(--border-strong)" }}>0°C</span>
+                      <span style={{ fontSize: "11px", color: "var(--border-strong)" }}>50°C</span>
                     </div>
                   </div>
 
@@ -354,13 +354,13 @@ export function SettingsScreen() {
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
                       <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                         <Droplets size={16} color="#3B82F6" strokeWidth={2} />
-                        <span style={{ fontSize: "13px", fontWeight: 600, color: "#1E293B" }}>
+                        <span style={{ fontSize: "13px", fontWeight: 600, color: "var(--text-primary)" }}>
                           Manipulasi Kelembaban
                         </span>
                       </div>
                       <span
                         style={{
-                          background: "#EFF6FF",
+                          background: "var(--bg-primary-light)",
                           color: "#3B82F6",
                           borderRadius: "8px",
                           padding: "3px 10px",
@@ -385,35 +385,35 @@ export function SettingsScreen() {
                       }}
                     />
                     <div style={{ display: "flex", justifyContent: "space-between", marginTop: "4px" }}>
-                      <span style={{ fontSize: "11px", color: "#CBD5E1" }}>0%</span>
-                      <span style={{ fontSize: "11px", color: "#CBD5E1" }}>100%</span>
+                      <span style={{ fontSize: "11px", color: "var(--border-strong)" }}>0%</span>
+                      <span style={{ fontSize: "11px", color: "var(--border-strong)" }}>100%</span>
                     </div>
                   </div>
 
                   {/* Preview Box */}
                   <div
                     style={{
-                      background: "#F8F9FA",
+                      background: "var(--bg-app)",
                       borderRadius: "12px",
                       padding: "12px 14px",
-                      border: "1px dashed #CBD5E1",
+                      border: "1px dashed var(--border-strong)",
                       display: "flex",
                       justifyContent: "space-around",
                     }}
                   >
                     <div style={{ textAlign: "center" }}>
-                      <p style={{ fontSize: "10px", color: "#94A3B8", marginBottom: "2px" }}>Suhu Sim.</p>
+                      <p style={{ fontSize: "10px", color: "var(--icon-muted)", marginBottom: "2px" }}>Suhu Sim.</p>
                       <p style={{ fontSize: "18px", fontWeight: 800, color: "#F97316" }}>{simTemp}°C</p>
                     </div>
-                    <div style={{ width: "1px", background: "#E2E8F0" }} />
+                    <div style={{ width: "1px", background: "var(--border-subtle)" }} />
                     <div style={{ textAlign: "center" }}>
-                      <p style={{ fontSize: "10px", color: "#94A3B8", marginBottom: "2px" }}>RH Sim.</p>
+                      <p style={{ fontSize: "10px", color: "var(--icon-muted)", marginBottom: "2px" }}>RH Sim.</p>
                       <p style={{ fontSize: "18px", fontWeight: 800, color: "#3B82F6" }}>{simHumidity}%</p>
                     </div>
-                    <div style={{ width: "1px", background: "#E2E8F0" }} />
+                    <div style={{ width: "1px", background: "var(--border-subtle)" }} />
                     <div style={{ textAlign: "center" }}>
-                      <p style={{ fontSize: "10px", color: "#94A3B8", marginBottom: "2px" }}>Kipas</p>
-                      <p style={{ fontSize: "13px", fontWeight: 800, color: simTemp > 25 ? "#22C55E" : "#64748B" }}>
+                      <p style={{ fontSize: "10px", color: "var(--icon-muted)", marginBottom: "2px" }}>Kipas</p>
+                      <p style={{ fontSize: "13px", fontWeight: 800, color: simTemp > 25 ? "#22C55E" : "var(--text-muted)" }}>
                         {simTemp > 25 ? "ON" : "OFF"}
                       </p>
                     </div>
@@ -427,7 +427,7 @@ export function SettingsScreen() {
         {/* App Info */}
         <div
           style={{
-            background: "#FFFFFF",
+            background: "var(--bg-card)",
             borderRadius: "14px",
             padding: "14px 18px",
             boxShadow: "0px 2px 6px rgba(0,0,0,0.04)",
@@ -436,15 +436,15 @@ export function SettingsScreen() {
             alignItems: "center",
           }}
         >
-          <span style={{ fontSize: "13px", color: "#64748B" }}>Versi Aplikasi</span>
+          <span style={{ fontSize: "13px", color: "var(--text-muted)" }}>Versi Aplikasi</span>
           <span
             style={{
-              background: "#F1F5F9",
+              background: "var(--bg-hover)",
               borderRadius: "8px",
               padding: "3px 10px",
               fontSize: "12px",
               fontWeight: 600,
-              color: "#475569",
+              color: "var(--text-secondary)",
             }}
           >
             v1.2.0 Beta

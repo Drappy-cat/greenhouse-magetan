@@ -22,8 +22,8 @@ export function BottomNav() {
         transform: "translateX(-50%)",
         width: "100%",
         maxWidth: "430px",
-        background: "#FFFFFF",
-        borderTop: "1px solid #F1F5F9",
+        background: "var(--bg-card)",
+        borderTop: "1px solid var(--bg-hover)",
         boxShadow: "0px -2px 12px rgba(0,0,0,0.06)",
         display: "flex",
         justifyContent: "space-around",
@@ -54,7 +54,7 @@ export function BottomNav() {
           >
             <motion.div
               animate={{
-                color: isActive ? "#3B82F6" : "#94A3B8",
+                color: isActive ? "#3B82F6" : "var(--icon-muted)",
                 y: isActive ? -4 : 0,
                 scale: isActive ? 1.15 : 1,
               }}
@@ -69,7 +69,7 @@ export function BottomNav() {
             
             <motion.span
               animate={{
-                color: isActive ? "#3B82F6" : "#94A3B8",
+                color: isActive ? "#3B82F6" : "var(--icon-muted)",
                 opacity: isActive ? 1 : 0.8,
               }}
               transition={{ duration: 0.3 }}

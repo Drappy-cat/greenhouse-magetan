@@ -63,7 +63,7 @@ export function DashboardScreen() {
     <div
       style={{
         minHeight: "100vh",
-        background: "#F8F9FA",
+        background: "var(--bg-app)",
         fontFamily: "'Inter', sans-serif",
         paddingBottom: "80px",
       }}
@@ -75,15 +75,15 @@ export function DashboardScreen() {
           alignItems: "center",
           justifyContent: "space-between",
           padding: "56px 20px 16px",
-          background: "#FFFFFF",
+          background: "var(--bg-card)",
           boxShadow: "0px 1px 4px rgba(0,0,0,0.04)",
         }}
       >
-        <span style={{ fontSize: "20px", fontWeight: 700, color: "#1E293B" }}>Beranda</span>
+        <span style={{ fontSize: "20px", fontWeight: 700, color: "var(--text-primary)" }}>Beranda</span>
         <button
           onClick={() => navigate("/notifications")}
           style={{
-            background: "#F1F5F9",
+            background: "var(--bg-hover)",
             border: "none",
             borderRadius: "12px",
             width: "40px",
@@ -95,7 +95,7 @@ export function DashboardScreen() {
             position: "relative",
           }}
         >
-          <Bell size={20} color="#1E293B" strokeWidth={1.8} />
+          <Bell size={20} color="var(--text-primary)" strokeWidth={1.8} />
           <span
             style={{
               position: "absolute",
@@ -227,7 +227,7 @@ export function DashboardScreen() {
         {/* Fuzzy Logic Card */}
         <div
           style={{
-            background: "#EFF6FF",
+            background: "var(--bg-primary-light)",
             borderRadius: "16px",
             padding: "18px",
             border: "1px solid #DBEAFE",
@@ -301,7 +301,7 @@ export function DashboardScreen() {
         {/* Setpoint Control Card */}
         <div
           style={{
-            background: "#FFFFFF",
+            background: "var(--bg-card)",
             borderRadius: "16px",
             padding: "18px",
             boxShadow: "0px 4px 10px rgba(0,0,0,0.05)",
@@ -309,7 +309,7 @@ export function DashboardScreen() {
         >
           <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "16px" }}>
             <ThermometerSun size={18} color="#3B82F6" strokeWidth={2} />
-            <span style={{ fontSize: "15px", fontWeight: 700, color: "#1E293B" }}>Atur Target Suhu</span>
+            <span style={{ fontSize: "15px", fontWeight: 700, color: "var(--text-primary)" }}>Atur Target Suhu</span>
           </div>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <motion.button
@@ -319,7 +319,7 @@ export function DashboardScreen() {
                 width: "48px",
                 height: "48px",
                 borderRadius: "50%",
-                background: "#F1F5F9",
+                background: "var(--bg-hover)",
                 border: "none",
                 cursor: "pointer",
                 display: "flex",
@@ -327,7 +327,7 @@ export function DashboardScreen() {
                 justifyContent: "center",
                 fontSize: "24px",
                 fontWeight: 300,
-                color: "#64748B",
+                color: "var(--text-muted)",
               }}
             >
               −
@@ -347,7 +347,7 @@ export function DashboardScreen() {
                         width: "100%",
                         fontSize: "48px",
                         fontWeight: 800,
-                        color: "#1E293B",
+                        color: "var(--text-primary)",
                         letterSpacing: "-2px",
                         lineHeight: "48px",
                       }}
@@ -356,9 +356,9 @@ export function DashboardScreen() {
                     </motion.div>
                   </AnimatePresence>
                 </div>
-                <span style={{ fontSize: "22px", fontWeight: 600, color: "#64748B", marginTop: "2px" }}>°C</span>
+                <span style={{ fontSize: "22px", fontWeight: 600, color: "var(--text-muted)", marginTop: "2px" }}>°C</span>
               </div>
-              <p style={{ fontSize: "12px", color: "#94A3B8", marginTop: "4px" }}>Target Setpoint</p>
+              <p style={{ fontSize: "12px", color: "var(--icon-muted)", marginTop: "4px" }}>Target Setpoint</p>
             </div>
             <motion.button
               whileTap={{ scale: 0.85 }}
@@ -386,12 +386,12 @@ export function DashboardScreen() {
 
         {/* Actuators Grid */}
         <div>
-          <p style={{ fontSize: "15px", fontWeight: 700, color: "#1E293B", marginBottom: "10px" }}>Status Aktuator</p>
+          <p style={{ fontSize: "15px", fontWeight: 700, color: "var(--text-primary)", marginBottom: "10px" }}>Status Aktuator</p>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
             {/* Fan Card */}
             <div
               style={{
-                background: "#FFFFFF",
+                background: "var(--bg-card)",
                 borderRadius: "16px",
                 padding: "18px 14px",
                 boxShadow: "0px 4px 10px rgba(0,0,0,0.05)",
@@ -399,14 +399,14 @@ export function DashboardScreen() {
                 flexDirection: "column",
                 alignItems: "center",
                 gap: "10px",
-                border: `1.5px solid ${fanOn ? "#D1FAE5" : "#F1F5F9"}`,
+                border: `1.5px solid ${fanOn ? "#D1FAE5" : "var(--bg-hover)"}`,
                 transition: "border-color 0.3s",
               }}
             >
               <div
                 className="no-invert"
                 style={{
-                  background: fanOn ? "#F0FDF4" : "#F8F9FA",
+                  background: fanOn ? "#F0FDF4" : "var(--bg-app)",
                   borderRadius: "14px",
                   width: "52px",
                   height: "52px",
@@ -416,15 +416,15 @@ export function DashboardScreen() {
                   transition: "background 0.3s",
                 }}
               >
-                <Wind size={26} color={fanOn ? "#22C55E" : "#64748B"} strokeWidth={1.8} />
+                <Wind size={26} color={fanOn ? "#22C55E" : "var(--text-muted)"} strokeWidth={1.8} />
               </div>
-              <span style={{ fontSize: "13px", fontWeight: 500, color: "#475569", textAlign: "center" }}>
+              <span style={{ fontSize: "13px", fontWeight: 500, color: "var(--text-secondary)", textAlign: "center" }}>
                 Kipas Sirkulasi
               </span>
               <span
                 className="no-invert"
                 style={{
-                  background: fanOn ? "#22C55E" : "#64748B",
+                  background: fanOn ? "#22C55E" : "var(--text-muted)",
                   color: "white",
                   borderRadius: "20px",
                   padding: "4px 16px",
@@ -441,7 +441,7 @@ export function DashboardScreen() {
             {/* Heater Card */}
             <div
               style={{
-                background: "#FFFFFF",
+                background: "var(--bg-card)",
                 borderRadius: "16px",
                 padding: "18px 14px",
                 boxShadow: "0px 4px 10px rgba(0,0,0,0.05)",
@@ -449,14 +449,14 @@ export function DashboardScreen() {
                 flexDirection: "column",
                 alignItems: "center",
                 gap: "10px",
-                border: `1.5px solid ${heaterOn ? "#FFEDD5" : "#F1F5F9"}`,
+                border: `1.5px solid ${heaterOn ? "#FFEDD5" : "var(--bg-hover)"}`,
                 transition: "border-color 0.3s",
               }}
             >
               <div
                 className="no-invert"
                 style={{
-                  background: heaterOn ? "#FFF7ED" : "#F8F9FA",
+                  background: heaterOn ? "#FFF7ED" : "var(--bg-app)",
                   borderRadius: "14px",
                   width: "52px",
                   height: "52px",
@@ -466,15 +466,15 @@ export function DashboardScreen() {
                   transition: "background 0.3s",
                 }}
               >
-                <Flame size={26} color={heaterOn ? "#F97316" : "#64748B"} strokeWidth={1.8} />
+                <Flame size={26} color={heaterOn ? "#F97316" : "var(--text-muted)"} strokeWidth={1.8} />
               </div>
-              <span style={{ fontSize: "13px", fontWeight: 500, color: "#475569", textAlign: "center" }}>
+              <span style={{ fontSize: "13px", fontWeight: 500, color: "var(--text-secondary)", textAlign: "center" }}>
                 Pemanas
               </span>
               <span
                 className="no-invert"
                 style={{
-                  background: heaterOn ? "#F97316" : "#64748B",
+                  background: heaterOn ? "#F97316" : "var(--text-muted)",
                   color: "white",
                   borderRadius: "20px",
                   padding: "4px 16px",

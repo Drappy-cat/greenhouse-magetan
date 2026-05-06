@@ -2,24 +2,77 @@
 @import './tailwind.css';
 @import './theme.css';
 
+:root {
+  --bg-body: #E5E7EB;
+  --bg-app: #F8F9FA;
+  --bg-card: #FFFFFF;
+  --bg-input: #F8FAFC;
+  --bg-hover: #F1F5F9;
+  --bg-success-light: #ECFDF5;
+  --bg-primary-light: #EFF6FF;
+  --border-subtle: #E2E8F0;
+  --border-strong: #CBD5E1;
+  
+  --text-heading: #0F172A;
+  --text-primary: #1E293B;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+  --text-disabled: #94A3B8;
+
+  --icon-muted: #94A3B8;
+  --shadow-color: rgba(0,0,0,0.07);
+
+  /* Glow Shadows */
+  --glow-primary: 0px 4px 14px rgba(59, 130, 246, 0.2);
+  --glow-success: 0px 4px 14px rgba(34, 197, 94, 0.2);
+  --glow-warning: 0px 4px 14px rgba(249, 115, 22, 0.2);
+  --glow-card: 0px 4px 20px rgba(0, 0, 0, 0.05);
+
+  /* Specific Card Colors */
+  --bg-ai-card: var(--bg-primary-light);
+  --text-ai-title: #1E3A8A;
+  --text-ai-desc: #1E40AF;
+  --bg-ai-badge: #BFDBFE;
+  --bg-ai-pill: #DBEAFE;
+  --text-ai-pill: #1E40AF;
+  --border-ai-card: #DBEAFE;
+}
+
 html.dark {
-  filter: invert(1) hue-rotate(180deg);
-  background: #000;
-}
+  background: var(--bg-body);
+  --bg-body: #06111A;
+  --bg-app: #0D1F2D;
+  --bg-card: #132B3A;
+  --bg-input: #1A3648;
+  --bg-hover: #214358;
+  --bg-success-light: rgba(20, 184, 166, 0.15);
+  --bg-primary-light: #1E3A5F;
+  --border-subtle: #285163;
+  --border-strong: #3A6B7E;
+  
+  --text-heading: #F8FAFC;
+  --text-primary: #F1F5F9;
+  --text-secondary: #CBD5E1;
+  --text-muted: #94A3B8;
+  --text-disabled: #64748B;
 
-html.dark img, 
-html.dark video,
-html.dark iframe,
-html.dark .no-invert,
-.dark .no-invert {
-  filter: invert(1) hue-rotate(180deg);
-}
+  --icon-muted: #64748B;
+  --shadow-color: rgba(0,0,0,0.3);
 
-/* Force dark slate to invert to pure white */
-html.dark [style*="color: #1E293B"],
-html.dark [style*="color: '#1E293B'"],
-html.dark [style*='color: "#1E293B"'] {
-  color: #000000 !important; /* Inverts to #FFFFFF */
+  /* Glow Shadows for Dark Mode (Neon effect) */
+  --glow-primary: 0px 0px 24px rgba(59, 130, 246, 0.5);
+  --glow-success: 0px 0px 24px rgba(34, 197, 94, 0.4);
+  --glow-warning: 0px 0px 24px rgba(249, 115, 22, 0.4);
+  --glow-card: 0px 8px 30px rgba(59, 130, 246, 0.1);
+
+  /* Specific Card Colors */
+  --bg-ai-card: rgba(59, 130, 246, 0.1);
+  --text-ai-title: #93C5FD;
+  --text-ai-desc: #BFDBFE;
+  --bg-ai-badge: rgba(59, 130, 246, 0.3);
+  --bg-ai-pill: rgba(59, 130, 246, 0.25);
+  --text-ai-pill: #93C5FD;
+  --border-ai-card: rgba(59, 130, 246, 0.2);
 }
 
 /* Custom View Transition for Theme Toggle */

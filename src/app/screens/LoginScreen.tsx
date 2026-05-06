@@ -60,7 +60,7 @@ export function LoginScreen() {
       transition={{ duration: 0.6 }}
       style={{
         minHeight: "100vh",
-        background: isDark ? "#0F172A" : "#F8F9FA",
+        background: "var(--bg-app)",
         fontFamily: "'Inter', sans-serif",
         display: "flex",
         flexDirection: "column",
@@ -95,8 +95,8 @@ export function LoginScreen() {
           position: "absolute",
           top: "24px",
           right: "24px",
-          background: "#FFFFFF",
-          border: "1px solid #E2E8F0",
+          background: "var(--bg-card)",
+          border: "1px solid var(--border-subtle)",
           borderRadius: "50%",
           width: "40px",
           height: "40px",
@@ -105,8 +105,8 @@ export function LoginScreen() {
           justifyContent: "center",
           cursor: "pointer",
           boxShadow: "0px 2px 8px rgba(0,0,0,0.05)",
-          color: "#475569",
-          zIndex: 10,
+          color: "var(--text-secondary)",
+          zIndex: 99,
         }}
       >
         {isDark ? <Sun size={20} /> : <Moon size={20} />}
@@ -195,7 +195,7 @@ export function LoginScreen() {
           style={{
             fontSize: "24px",
             fontWeight: 800,
-            color: isDark ? "#FFFFFF" : "#0F172A",
+            color: "var(--text-heading)",
             letterSpacing: "-0.6px",
             lineHeight: 1.2,
             margin: "0 0 6px",
@@ -207,8 +207,8 @@ export function LoginScreen() {
         <span
           style={{
             display: "inline-block",
-            background: isDark ? "rgba(20, 184, 166, 0.15)" : "#ECFDF5",
-            color: isDark ? "#2DD4BF" : "#15803D",
+            background: "var(--bg-success-light)",
+            color: "#15803D",
             borderRadius: "20px",
             padding: "4px 14px",
             fontSize: "12px",
@@ -226,9 +226,9 @@ export function LoginScreen() {
         transition={{ delay: 0.45, duration: 0.6, ease: "easeOut" }}
         style={{
           width: "100%",
-          background: isDark ? "#1E293B" : "#FFFFFF",
+          background: "var(--bg-card)",
           borderRadius: "24px",
-          boxShadow: isDark ? "0px 10px 30px rgba(0,0,0,0.3)" : "0px 4px 24px rgba(0,0,0,0.07)",
+          boxShadow: "0px 4px 24px var(--shadow-color)",
           overflow: "hidden",
           zIndex: 10,
         }}
@@ -237,7 +237,7 @@ export function LoginScreen() {
         <div
           style={{
             display: "flex",
-            background: isDark ? "#0F172A" : "#F1F5F9",
+            background: "var(--bg-hover)",
             margin: "20px 20px 0",
             borderRadius: "14px",
             padding: "4px",
@@ -262,15 +262,9 @@ export function LoginScreen() {
                 justifyContent: "center",
                 gap: "7px",
                 transition: "background 0.25s, color 0.25s, box-shadow 0.25s",
-                background: activeTab === tab 
-                  ? (isDark ? "#334155" : "#FFFFFF") 
-                  : "transparent",
-                color: activeTab === tab 
-                  ? (isDark ? "#FFFFFF" : "#1E293B") 
-                  : (isDark ? "#64748B" : "#94A3B8"),
-                boxShadow: activeTab === tab 
-                  ? (isDark ? "0px 2px 8px rgba(0,0,0,0.3)" : "0px 2px 8px rgba(0,0,0,0.1)") 
-                  : "none",
+                background: activeTab === tab ? "var(--bg-card)" : "transparent",
+                color: activeTab === tab ? "var(--text-primary)" : "var(--icon-muted)",
+                boxShadow: activeTab === tab ? "0px 2px 8px rgba(0,0,0,0.1)" : "none",
               }}
             >
               {tab === "password" ? (
@@ -327,7 +321,7 @@ export function LoginScreen() {
         transition={{ delay: 0.7, duration: 0.5 }}
         style={{ textAlign: "center", paddingTop: "24px", zIndex: 10 }}
       >
-        <p style={{ fontSize: "13px", color: isDark ? "#94A3B8" : "#64748B", marginBottom: "14px" }}>
+        <p style={{ fontSize: "13px", color: "var(--text-muted)", marginBottom: "14px" }}>
           Belum punya akun?{" "}
           <button
             onClick={() => navigate("/register")}
@@ -340,11 +334,11 @@ export function LoginScreen() {
             Daftar Sekarang
           </button>
         </p>
-        <p style={{ fontSize: "11px", color: "#CBD5E1", fontWeight: 400, lineHeight: 1.6 }}>
-          © 2025 Magetan Greenhouse
+        <p style={{ fontSize: "11px", color: "var(--border-strong)", fontWeight: 400, lineHeight: 1.6 }}>
+          © 2026 Magetan Greenhouse
         </p>
-        <p style={{ fontSize: "11px", color: "#CBD5E1", fontWeight: 400 }}>
-          Fuzzy Logic Automation System • v1.2.0
+        <p style={{ fontSize: "11px", color: "var(--border-strong)", fontWeight: 400 }}>
+          Fuzzy Logic Automation System • v1.0.0
         </p>
       </motion.div>
     </motion.div>
@@ -365,7 +359,7 @@ function PasswordForm({
 }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-      <p style={{ fontSize: "12px", fontWeight: 700, color: "#94A3B8", margin: "0 0 4px", textTransform: "uppercase", letterSpacing: "0.8px" }}>
+      <p style={{ fontSize: "12px", fontWeight: 700, color: "var(--icon-muted)", margin: "0 0 4px", textTransform: "uppercase", letterSpacing: "0.8px" }}>
         Masuk ke Akun
       </p>
 
@@ -379,7 +373,7 @@ function PasswordForm({
           onChange={(e) => setEmail(e.target.value)}
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = "#3B82F6")}
-          onBlur={(e) => (e.currentTarget.style.borderColor = "#E2E8F0")}
+          onBlur={(e) => (e.currentTarget.style.borderColor = "var(--border-subtle)")}
         />
       </div>
 
@@ -395,11 +389,11 @@ function PasswordForm({
             onKeyDown={(e) => e.key === "Enter" && onLogin()}
             style={{ ...inputStyle, paddingRight: "48px" }}
             onFocus={(e) => (e.currentTarget.style.borderColor = "#3B82F6")}
-            onBlur={(e) => (e.currentTarget.style.borderColor = "#E2E8F0")}
+            onBlur={(e) => (e.currentTarget.style.borderColor = "var(--border-subtle)")}
           />
           <button
             onClick={() => setShowPassword(!showPassword)}
-            style={{ position: "absolute", right: "14px", top: "50%", transform: "translateY(-50%)", background: "none", border: "none", cursor: "pointer", color: "#94A3B8", padding: "4px", display: "flex", alignItems: "center" }}
+            style={{ position: "absolute", right: "14px", top: "50%", transform: "translateY(-50%)", background: "none", border: "none", cursor: "pointer", color: "var(--icon-muted)", padding: "4px", display: "flex", alignItems: "center" }}
           >
             {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
           </button>
@@ -423,7 +417,7 @@ function PasswordForm({
         whileTap={{ scale: 0.97 }}
         style={{
           width: "100%", padding: "14px", borderRadius: "12px",
-          background: loading ? "#94A3B8" : "linear-gradient(135deg, #2563EB 0%, #3B82F6 100%)",
+          background: loading ? "var(--icon-muted)" : "linear-gradient(135deg, #2563EB 0%, #3B82F6 100%)",
           border: "none", cursor: loading ? "not-allowed" : "pointer",
           color: "#FFF", fontSize: "15px", fontWeight: 700,
           fontFamily: "'Inter', sans-serif",
@@ -497,7 +491,7 @@ function QrLoginPanel({ onSuccess }: { onSuccess: () => void }) {
       {/* How-to instruction */}
       <div
         style={{
-          width: "100%", background: "#EFF6FF", border: "1px solid #BFDBFE",
+          width: "100%", background: "var(--bg-primary-light)", border: "1px solid #BFDBFE",
           borderRadius: "14px", padding: "12px 14px", display: "flex", gap: "10px", alignItems: "flex-start",
           boxSizing: "border-box",
         }}
@@ -518,7 +512,7 @@ function QrLoginPanel({ onSuccess }: { onSuccess: () => void }) {
         style={{
           position: "relative", width: "210px", height: "210px",
           borderRadius: "20px", padding: "16px", boxSizing: "border-box",
-          background: status === "success" ? "linear-gradient(135deg, #064E3B, #047857)" : "#FFFFFF",
+          background: status === "success" ? "linear-gradient(135deg, #064E3B, #047857)" : "var(--bg-card)",
           boxShadow: status === "scanning" || status === "scanned"
             ? "0 0 0 3px #3B82F6, 0px 8px 24px rgba(59,130,246,0.25)"
             : status === "success"
@@ -541,8 +535,8 @@ function QrLoginPanel({ onSuccess }: { onSuccess: () => void }) {
               <QRCodeSVG
                 value={qrValue}
                 size={178}
-                bgColor="#FFFFFF"
-                fgColor="#0F172A"
+                bgColor="var(--bg-card)"
+                fgColor="var(--text-heading)"
                 level="M"
                 imageSettings={{
                   src: "",
@@ -613,12 +607,12 @@ function QrLoginPanel({ onSuccess }: { onSuccess: () => void }) {
                 transition={{ duration: 0.4 }}
                 style={{
                   width: "64px", height: "64px", borderRadius: "20px",
-                  background: "#EFF6FF", display: "flex", alignItems: "center", justifyContent: "center",
+                  background: "var(--bg-primary-light)", display: "flex", alignItems: "center", justifyContent: "center",
                 }}
               >
                 <Smartphone size={34} color="#2563EB" strokeWidth={1.8} />
               </motion.div>
-              <p style={{ margin: 0, fontSize: "13px", fontWeight: 700, color: "#1E293B", textAlign: "center" }}>
+              <p style={{ margin: 0, fontSize: "13px", fontWeight: 700, color: "var(--text-primary)", textAlign: "center" }}>
                 Konfirmasi di HP Anda
               </p>
             </motion.div>
@@ -654,7 +648,7 @@ function QrLoginPanel({ onSuccess }: { onSuccess: () => void }) {
                   <CheckCircle2 size={36} color="#34D399" strokeWidth={2} />
                 </div>
               </div>
-              <p style={{ margin: 0, fontSize: "13px", fontWeight: 800, color: "#FFFFFF", textAlign: "center" }}>
+              <p style={{ margin: 0, fontSize: "13px", fontWeight: 800, color: "var(--bg-card)", textAlign: "center" }}>
                 Berhasil!
               </p>
             </motion.div>
@@ -695,17 +689,17 @@ function QrLoginPanel({ onSuccess }: { onSuccess: () => void }) {
       {(status === "waiting" || status === "scanning") && (
         <div style={{ width: "100%", boxSizing: "border-box" }}>
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "6px" }}>
-            <span style={{ fontSize: "11px", color: "#94A3B8", fontWeight: 500 }}>
+            <span style={{ fontSize: "11px", color: "var(--icon-muted)", fontWeight: 500 }}>
               QR kedaluwarsa dalam
             </span>
             <span style={{
               fontSize: "11px", fontWeight: 700,
-              color: countdown <= 15 ? "#EF4444" : "#64748B",
+              color: countdown <= 15 ? "#EF4444" : "var(--text-muted)",
             }}>
               0:{String(countdown).padStart(2, "0")}
             </span>
           </div>
-          <div style={{ height: "4px", background: "#E2E8F0", borderRadius: "4px", overflow: "hidden" }}>
+          <div style={{ height: "4px", background: "var(--border-subtle)", borderRadius: "4px", overflow: "hidden" }}>
             <motion.div
               animate={{ width: `${expiredPct}%` }}
               transition={{ duration: 0.8 }}
@@ -724,16 +718,16 @@ function QrLoginPanel({ onSuccess }: { onSuccess: () => void }) {
         <div style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", boxSizing: "border-box" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
             <ShieldCheck size={13} color="#22C55E" strokeWidth={2.5} />
-            <span style={{ fontSize: "11px", color: "#64748B", fontWeight: 500 }}>Enkripsi end-to-end</span>
-            <Wifi size={11} color="#94A3B8" strokeWidth={2} />
+            <span style={{ fontSize: "11px", color: "var(--text-muted)", fontWeight: 500 }}>Enkripsi end-to-end</span>
+            <Wifi size={11} color="var(--icon-muted)" strokeWidth={2} />
           </div>
           <button
             onClick={resetQr}
             style={{
-              background: "none", border: "1px solid #E2E8F0",
+              background: "none", border: "1px solid var(--border-subtle)",
               borderRadius: "10px", padding: "6px 10px",
               cursor: "pointer", display: "flex", alignItems: "center", gap: "5px",
-              color: "#64748B", fontSize: "11px", fontWeight: 600,
+              color: "var(--text-muted)", fontSize: "11px", fontWeight: 600,
               fontFamily: "'Inter', sans-serif",
             }}
           >
@@ -760,7 +754,7 @@ function QrLoginPanel({ onSuccess }: { onSuccess: () => void }) {
 
 /* ── Status display maps ── */
 const statusBg: Record<QrStatus, string> = {
-  waiting: "#F0FDF4", scanning: "#EFF6FF", scanned: "#EFF6FF", success: "#F0FDF4",
+  waiting: "#F0FDF4", scanning: "var(--bg-primary-light)", scanned: "var(--bg-primary-light)", success: "#F0FDF4",
 };
 const statusBorder: Record<QrStatus, string> = {
   waiting: "#BBF7D0", scanning: "#BFDBFE", scanned: "#BFDBFE", success: "#BBF7D0",
@@ -781,13 +775,13 @@ const statusLabel: Record<QrStatus, string> = {
 /* ── Shared styles ── */
 const labelStyle: React.CSSProperties = {
   display: "block", fontSize: "12px", fontWeight: 600,
-  color: "#64748B", marginBottom: "6px",
+  color: "var(--text-muted)", marginBottom: "6px",
 };
 
 const inputStyle: React.CSSProperties = {
   width: "100%", padding: "13px 16px", borderRadius: "12px",
-  border: "1.5px solid #E2E8F0", background: "#F8FAFC",
-  fontSize: "14px", color: "#1E293B", outline: "none",
+  border: "1.5px solid var(--border-subtle)", background: "var(--bg-input)",
+  fontSize: "14px", color: "var(--text-primary)", outline: "none",
   fontFamily: "'Inter', sans-serif", boxSizing: "border-box",
   transition: "border-color 0.2s",
 };

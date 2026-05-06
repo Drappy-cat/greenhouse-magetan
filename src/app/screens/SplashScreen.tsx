@@ -223,7 +223,7 @@ export function SplashScreen() {
                 style={{
                   fontSize: "38px",
                   fontWeight: 900,
-                  color: "#FFFFFF",
+                  color: "var(--bg-card)",
                   letterSpacing: "-1px",
                   lineHeight: 1.1,
                   margin: "0 0 4px",

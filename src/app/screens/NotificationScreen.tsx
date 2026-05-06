@@ -86,7 +86,7 @@ const typeStyles: Record<NotifType, { bg: string; iconBg: string; iconColor: str
   warning: { bg: "#FFFBEB", iconBg: "#FEF3C7", iconColor: "#D97706", border: "#FDE68A" },
   success: { bg: "#F0FDF4", iconBg: "#DCFCE7", iconColor: "#16A34A", border: "#BBF7D0" },
   error:   { bg: "#FFF1F2", iconBg: "#FFE4E6", iconColor: "#E11D48", border: "#FECDD3" },
-  info:    { bg: "#EFF6FF", iconBg: "#DBEAFE", iconColor: "#2563EB", border: "#BFDBFE" },
+  info:    { bg: "var(--bg-primary-light)", iconBg: "#DBEAFE", iconColor: "#2563EB", border: "#BFDBFE" },
 };
 
 export function NotificationScreen() {
@@ -142,7 +142,7 @@ export function NotificationScreen() {
     <div
       style={{
         minHeight: "100vh",
-        background: "#F8F9FA",
+        background: "var(--bg-app)",
         fontFamily: "'Inter', sans-serif",
         paddingBottom: "32px",
         position: "relative",
@@ -151,7 +151,7 @@ export function NotificationScreen() {
       {/* ── Top App Bar ── */}
       <div
         style={{
-          background: "#FFFFFF",
+          background: "var(--bg-card)",
           padding: "52px 16px 14px",
           boxShadow: "0px 1px 4px rgba(0,0,0,0.05)",
           position: "sticky",
@@ -165,7 +165,7 @@ export function NotificationScreen() {
             <button
               onClick={() => navigate(-1)}
               style={{
-                background: "#F1F5F9",
+                background: "var(--bg-hover)",
                 border: "none",
                 borderRadius: "10px",
                 width: "36px",
@@ -176,10 +176,10 @@ export function NotificationScreen() {
                 cursor: "pointer",
               }}
             >
-              <ArrowLeft size={18} color="#1E293B" strokeWidth={2} />
+              <ArrowLeft size={18} color="var(--text-primary)" strokeWidth={2} />
             </button>
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <span style={{ fontSize: "18px", fontWeight: 700, color: "#1E293B" }}>
+              <span style={{ fontSize: "18px", fontWeight: 700, color: "var(--text-primary)" }}>
                 Notifikasi
               </span>
               {unreadCount > 0 && (
@@ -207,7 +207,7 @@ export function NotificationScreen() {
               <button
                 onClick={markAllRead}
                 style={{
-                  background: "#EFF6FF",
+                  background: "var(--bg-primary-light)",
                   border: "none",
                   borderRadius: "10px",
                   padding: "8px 12px",
@@ -264,19 +264,19 @@ export function NotificationScreen() {
               style={{
                 width: "80px",
                 height: "80px",
-                background: "#F1F5F9",
+                background: "var(--bg-hover)",
                 borderRadius: "24px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
               }}
             >
-              <BellOff size={36} color="#CBD5E1" strokeWidth={1.5} />
+              <BellOff size={36} color="var(--border-strong)" strokeWidth={1.5} />
             </div>
-            <p style={{ fontSize: "16px", fontWeight: 700, color: "#1E293B" }}>
+            <p style={{ fontSize: "16px", fontWeight: 700, color: "var(--text-primary)" }}>
               Tidak Ada Notifikasi
             </p>
-            <p style={{ fontSize: "13px", color: "#94A3B8", textAlign: "center", maxWidth: "220px", lineHeight: 1.5 }}>
+            <p style={{ fontSize: "13px", color: "var(--icon-muted)", textAlign: "center", maxWidth: "220px", lineHeight: 1.5 }}>
               Semua riwayat notifikasi telah dihapus. Sistem akan mengirim pesan saat ada kejadian baru.
             </p>
             <button
@@ -338,7 +338,7 @@ export function NotificationScreen() {
               transition={{ type: "spring", duration: 0.35 }}
               onClick={(e) => e.stopPropagation()}
               style={{
-                background: "#FFFFFF",
+                background: "var(--bg-card)",
                 borderRadius: "24px",
                 padding: "28px 24px",
                 width: "calc(100% - 48px)",
@@ -362,10 +362,10 @@ export function NotificationScreen() {
               >
                 <Trash2 size={28} color="#E11D48" strokeWidth={1.8} />
               </div>
-              <p style={{ fontSize: "17px", fontWeight: 700, color: "#1E293B", marginBottom: "8px" }}>
+              <p style={{ fontSize: "17px", fontWeight: 700, color: "var(--text-primary)", marginBottom: "8px" }}>
                 Bersihkan Semua?
               </p>
-              <p style={{ fontSize: "13px", color: "#64748B", lineHeight: 1.6, marginBottom: "24px" }}>
+              <p style={{ fontSize: "13px", color: "var(--text-muted)", lineHeight: 1.6, marginBottom: "24px" }}>
                 Seluruh riwayat notifikasi akan dihapus permanen. Tindakan ini tidak dapat dibatalkan.
               </p>
               <div style={{ display: "flex", gap: "10px" }}>
@@ -375,11 +375,11 @@ export function NotificationScreen() {
                     flex: 1,
                     padding: "13px",
                     borderRadius: "12px",
-                    border: "1.5px solid #E2E8F0",
-                    background: "#F8F9FA",
+                    border: "1.5px solid var(--border-subtle)",
+                    background: "var(--bg-app)",
                     fontSize: "14px",
                     fontWeight: 600,
-                    color: "#64748B",
+                    color: "var(--text-muted)",
                     cursor: "pointer",
                     fontFamily: "'Inter', sans-serif",
                   }}
@@ -431,7 +431,7 @@ function NotifGroup({
         style={{
           fontSize: "12px",
           fontWeight: 700,
-          color: "#94A3B8",
+          color: "var(--icon-muted)",
           textTransform: "uppercase",
           letterSpacing: "0.8px",
           marginBottom: "10px",
@@ -475,13 +475,13 @@ function NotifCard({
       transition={{ type: "spring", duration: 0.4 }}
       onClick={() => onRead(notif.id)}
       style={{
-        background: notif.read ? "#FFFFFF" : style.bg,
+        background: notif.read ? "var(--bg-card)" : style.bg,
         borderRadius: "16px",
         padding: "14px",
         boxShadow: notif.read
           ? "0px 2px 8px rgba(0,0,0,0.04)"
-          : "0px 3px 12px rgba(0,0,0,0.07)",
-        border: notif.read ? "1px solid #F1F5F9" : `1px solid ${style.border}`,
+          : "0px 3px 12px var(--shadow-color)",
+        border: notif.read ? "1px solid var(--bg-hover)" : `1px solid ${style.border}`,
         display: "flex",
         gap: "12px",
         alignItems: "flex-start",
@@ -529,7 +529,7 @@ function NotifCard({
             style={{
               fontSize: "13px",
               fontWeight: notif.read ? 600 : 700,
-              color: "#1E293B",
+              color: "var(--text-primary)",
               lineHeight: 1.3,
               paddingRight: "8px",
             }}
@@ -539,7 +539,7 @@ function NotifCard({
           <span
             style={{
               fontSize: "10px",
-              color: "#94A3B8",
+              color: "var(--icon-muted)",
               whiteSpace: "nowrap",
               fontWeight: 500,
               marginTop: "1px",
@@ -551,7 +551,7 @@ function NotifCard({
         <p
           style={{
             fontSize: "12px",
-            color: "#64748B",
+            color: "var(--text-muted)",
             lineHeight: 1.5,
             fontWeight: 400,
           }}
@@ -578,7 +578,7 @@ function NotifCard({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: "#CBD5E1",
+          color: "var(--border-strong)",
           transition: "color 0.15s, background 0.15s",
         }}
         onMouseEnter={(e) => {
@@ -586,7 +586,7 @@ function NotifCard({
           e.currentTarget.style.background = "#FFF1F2";
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.color = "#CBD5E1";
+          e.currentTarget.style.color = "var(--border-strong)";
           e.currentTarget.style.background = "none";
         }}
         title="Hapus notifikasi ini"

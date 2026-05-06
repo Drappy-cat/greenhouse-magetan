@@ -47,7 +47,7 @@ export function ForgotPasswordScreen() {
     <div
       style={{
         minHeight: "100vh",
-        background: "#F8F9FA",
+        background: "var(--bg-app)",
         fontFamily: "'Inter', sans-serif",
         display: "flex",
         flexDirection: "column",
@@ -104,7 +104,7 @@ export function ForgotPasswordScreen() {
                   <motion.div
                     animate={{
                       width: active ? "28px" : "8px",
-                      background: done ? "#34D399" : active ? "#FFFFFF" : "rgba(255,255,255,0.3)",
+                      background: done ? "#34D399" : active ? "var(--bg-card)" : "rgba(255,255,255,0.3)",
                     }}
                     transition={{ duration: 0.3 }}
                     style={{ height: "8px", borderRadius: "4px" }}
@@ -237,14 +237,14 @@ function EmailStep({ onNext }: { onNext: () => void }) {
       {/* Info card */}
       <div
         style={{
-          background: "#EFF6FF",
+          background: "var(--bg-primary-light)",
           border: "1px solid #BFDBFE",
           borderRadius: "14px",
           padding: "14px 16px",
           display: "flex",
           gap: "12px",
           alignItems: "flex-start",
-        }}W                                                                 
+        }}                                                        
       >
         <div
           style={{
@@ -275,7 +275,7 @@ function EmailStep({ onNext }: { onNext: () => void }) {
         <label style={labelStyle}>Alamat Email</label>
         <div style={{ position: "relative" }}>
           <div style={prefixIconStyle}>
-            <Mail size={16} color="#94A3B8" />
+            <Mail size={16} color="var(--icon-muted)" />
           </div>
           <input
             type="email"
@@ -285,7 +285,7 @@ function EmailStep({ onNext }: { onNext: () => void }) {
             onKeyDown={(e) => e.key === "Enter" && handleSend()}
             style={{ ...inputStyle(!!error), paddingLeft: "44px" }}
             onFocus={(e) => { e.currentTarget.style.borderColor = "#3B82F6"; }}
-            onBlur={(e) => { e.currentTarget.style.borderColor = error ? "#EF4444" : "#E2E8F0"; }}
+            onBlur={(e) => { e.currentTarget.style.borderColor = error ? "#EF4444" : "var(--border-subtle)"; }}
           />
         </div>
         <AnimatePresence>
@@ -302,7 +302,7 @@ function EmailStep({ onNext }: { onNext: () => void }) {
         shadow="rgba(37,99,235,0.35)"
       />
 
-      <p style={{ textAlign: "center", fontSize: "13px", color: "#64748B" }}>
+      <p style={{ textAlign: "center", fontSize: "13px", color: "var(--text-muted)" }}>
         Ingat kata sandi?{" "}
         <a href="/login" style={{ color: "#2563EB", fontWeight: 700, textDecoration: "none" }}>
           Kembali Login
@@ -422,22 +422,22 @@ function OtpStep({ onNext }: { onNext: () => void }) {
                 textAlign: "center",
                 fontSize: "22px",
                 fontWeight: 800,
-                color: "#1E293B",
+                color: "var(--text-primary)",
                 borderRadius: "14px",
                 border: `2px solid ${
-                  error ? "#EF4444" : digit ? "#3B82F6" : "#E2E8F0"
+                  error ? "#EF4444" : digit ? "#3B82F6" : "var(--border-subtle)"
                 }`,
-                background: digit ? "#EFF6FF" : "#F8FAFC",
+                background: digit ? "var(--bg-primary-light)" : "var(--bg-input)",
                 outline: "none",
                 fontFamily: "'Inter', sans-serif",
                 transition: "border-color 0.2s, background 0.2s",
                 caretColor: "transparent",
                 boxSizing: "border-box",
               }}
-              onFocus={(e) => { e.currentTarget.style.borderColor = "#3B82F6"; e.currentTarget.style.background = "#EFF6FF"; }}
+              onFocus={(e) => { e.currentTarget.style.borderColor = "#3B82F6"; e.currentTarget.style.background = "var(--bg-primary-light)"; }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = error ? "#EF4444" : digit ? "#3B82F6" : "#E2E8F0";
-                e.currentTarget.style.background = digit ? "#EFF6FF" : "#F8FAFC";
+                e.currentTarget.style.borderColor = error ? "#EF4444" : digit ? "#3B82F6" : "var(--border-subtle)";
+                e.currentTarget.style.background = digit ? "var(--bg-primary-light)" : "var(--bg-input)";
               }}
             />
           ))}
@@ -448,7 +448,7 @@ function OtpStep({ onNext }: { onNext: () => void }) {
           style={{
             marginTop: "12px",
             height: "3px",
-            background: "#E2E8F0",
+            background: "var(--border-subtle)",
             borderRadius: "4px",
             overflow: "hidden",
           }}
@@ -463,7 +463,7 @@ function OtpStep({ onNext }: { onNext: () => void }) {
             }}
           />
         </div>
-        <p style={{ fontSize: "12px", color: "#94A3B8", textAlign: "center", marginTop: "6px" }}>
+        <p style={{ fontSize: "12px", color: "var(--icon-muted)", textAlign: "center", marginTop: "6px" }}>
           {filled}/{OTP_LENGTH} digit terisi
         </p>
 
@@ -484,7 +484,7 @@ function OtpStep({ onNext }: { onNext: () => void }) {
       {/* Resend */}
       <div style={{ textAlign: "center" }}>
         {resendCooldown > 0 ? (
-          <p style={{ fontSize: "13px", color: "#94A3B8" }}>
+          <p style={{ fontSize: "13px", color: "var(--icon-muted)" }}>
             Kirim ulang kode dalam{" "}
             <span style={{ color: "#2563EB", fontWeight: 700 }}>
               0:{String(resendCooldown).padStart(2, "0")}
@@ -556,7 +556,7 @@ function NewPassStep({ onNext }: { onNext: () => void }) {
       <div>
         <label style={labelStyle}>Sandi Baru</label>
         <div style={{ position: "relative" }}>
-          <div style={prefixIconStyle}><Lock size={16} color="#94A3B8" /></div>
+          <div style={prefixIconStyle}><Lock size={16} color="var(--icon-muted)" /></div>
           <input
             type={showNew ? "text" : "password"}
             placeholder="Buat sandi baru"
@@ -564,7 +564,7 @@ function NewPassStep({ onNext }: { onNext: () => void }) {
             onChange={(e) => { setNewPass(e.target.value); if (submitted) setErrors((er) => ({ ...er, newPass: undefined })); }}
             style={{ ...inputStyle(submitted && !!errors.newPass), paddingLeft: "44px", paddingRight: "44px" }}
             onFocus={(e) => { e.currentTarget.style.borderColor = "#3B82F6"; }}
-            onBlur={(e) => { e.currentTarget.style.borderColor = submitted && errors.newPass ? "#EF4444" : "#E2E8F0"; }}
+            onBlur={(e) => { e.currentTarget.style.borderColor = submitted && errors.newPass ? "#EF4444" : "var(--border-subtle)"; }}
           />
           <button type="button" onClick={() => setShowNew(!showNew)} style={eyeBtn}>
             {showNew ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -580,7 +580,7 @@ function NewPassStep({ onNext }: { onNext: () => void }) {
                   key={l}
                   style={{
                     flex: 1, height: "5px", borderRadius: "4px",
-                    background: l <= pwStr.level ? pwStr.color : "#E2E8F0",
+                    background: l <= pwStr.level ? pwStr.color : "var(--border-subtle)",
                     transition: "background 0.3s",
                   }}
                 />
@@ -600,8 +600,8 @@ function NewPassStep({ onNext }: { onNext: () => void }) {
       {/* Requirements checklist */}
       <div
         style={{
-          background: "#F8FAFC",
-          border: "1px solid #E2E8F0",
+          background: "var(--bg-input)",
+          border: "1px solid var(--border-subtle)",
           borderRadius: "14px",
           padding: "14px 16px",
           display: "flex",
@@ -609,19 +609,19 @@ function NewPassStep({ onNext }: { onNext: () => void }) {
           gap: "8px",
         }}
       >
-        <p style={{ margin: "0 0 4px", fontSize: "12px", fontWeight: 700, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.6px" }}>
+        <p style={{ margin: "0 0 4px", fontSize: "12px", fontWeight: 700, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.6px" }}>
           Persyaratan sandi
         </p>
         {requirements.map((req) => (
           <motion.div
             key={req.label}
-            animate={{ color: req.ok ? "#16A34A" : "#94A3B8" }}
+            animate={{ color: req.ok ? "#16A34A" : "var(--icon-muted)" }}
             style={{ display: "flex", alignItems: "center", gap: "8px" }}
           >
             <motion.div animate={{ scale: req.ok ? 1 : 0.8, opacity: req.ok ? 1 : 0.5 }}>
-              <CheckCircle2 size={14} color={req.ok ? "#22C55E" : "#CBD5E1"} strokeWidth={2.5} />
+              <CheckCircle2 size={14} color={req.ok ? "#22C55E" : "var(--border-strong)"} strokeWidth={2.5} />
             </motion.div>
-            <span style={{ fontSize: "12px", fontWeight: 500, color: req.ok ? "#16A34A" : "#94A3B8", transition: "color 0.2s" }}>
+            <span style={{ fontSize: "12px", fontWeight: 500, color: req.ok ? "#16A34A" : "var(--icon-muted)", transition: "color 0.2s" }}>
               {req.label}
             </span>
           </motion.div>
@@ -632,7 +632,7 @@ function NewPassStep({ onNext }: { onNext: () => void }) {
       <div>
         <label style={labelStyle}>Konfirmasi Sandi Baru</label>
         <div style={{ position: "relative" }}>
-          <div style={prefixIconStyle}><Lock size={16} color="#94A3B8" /></div>
+          <div style={prefixIconStyle}><Lock size={16} color="var(--icon-muted)" /></div>
           <input
             type={showConfirm ? "text" : "password"}
             placeholder="Ulangi sandi baru"
@@ -640,7 +640,7 @@ function NewPassStep({ onNext }: { onNext: () => void }) {
             onChange={(e) => { setConfirmPass(e.target.value); if (submitted) setErrors((er) => ({ ...er, confirmPass: undefined })); }}
             style={{ ...inputStyle(submitted && !!errors.confirmPass), paddingLeft: "44px", paddingRight: "44px" }}
             onFocus={(e) => { e.currentTarget.style.borderColor = "#3B82F6"; }}
-            onBlur={(e) => { e.currentTarget.style.borderColor = submitted && errors.confirmPass ? "#EF4444" : "#E2E8F0"; }}
+            onBlur={(e) => { e.currentTarget.style.borderColor = submitted && errors.confirmPass ? "#EF4444" : "var(--border-subtle)"; }}
           />
           <button type="button" onClick={() => setShowConfirm(!showConfirm)} style={eyeBtn}>
             {showConfirm ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -906,11 +906,11 @@ function PrimaryButton({
         padding: "15px",
         borderRadius: "14px",
         background: loading
-          ? "#94A3B8"
+          ? "var(--icon-muted)"
           : `linear-gradient(135deg, ${color} 0%, ${color}CC 100%)`,
         border: "none",
         cursor: loading ? "not-allowed" : "pointer",
-        color: "#FFFFFF",
+        color: "var(--bg-card)",
         fontSize: "15px",
         fontWeight: 700,
         fontFamily: "'Inter', sans-serif",
@@ -976,7 +976,7 @@ const labelStyle: React.CSSProperties = {
   display: "block",
   fontSize: "12px",
   fontWeight: 600,
-  color: "#64748B",
+  color: "var(--text-muted)",
   marginBottom: "6px",
 };
 
@@ -984,10 +984,10 @@ const inputStyle = (hasError: boolean): React.CSSProperties => ({
   width: "100%",
   padding: "13px 16px",
   borderRadius: "12px",
-  border: `1.5px solid ${hasError ? "#EF4444" : "#E2E8F0"}`,
-  background: "#F8FAFC",
+  border: `1.5px solid ${hasError ? "#EF4444" : "var(--border-subtle)"}`,
+  background: "var(--bg-input)",
   fontSize: "14px",
-  color: "#1E293B",
+  color: "var(--text-primary)",
   outline: "none",
   fontFamily: "'Inter', sans-serif",
   boxSizing: "border-box",
@@ -1012,7 +1012,7 @@ const eyeBtn: React.CSSProperties = {
   background: "none",
   border: "none",
   cursor: "pointer",
-  color: "#94A3B8",
+  color: "var(--icon-muted)",
   padding: "4px",
   display: "flex",
   alignItems: "center",

@@ -8,7 +8,7 @@ export default function App() {
       <div
       style={{
         minHeight: "100vh",
-        background: "#E5E7EB",
+        background: "var(--bg-body)",
         display: "flex",
         alignItems: "flex-start",
         justifyContent: "center",
@@ -22,7 +22,7 @@ export default function App() {
           maxWidth: "430px",
           minHeight: "100vh",
           position: "relative",
-          background: "#F8F9FA",
+          background: "var(--bg-app)",
           boxShadow: "0px 0px 40px rgba(0,0,0,0.15)",
           overflow: "hidden",
         }}

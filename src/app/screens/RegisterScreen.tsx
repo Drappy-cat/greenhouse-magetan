@@ -185,7 +185,7 @@ export function RegisterScreen() {
     <div
       style={{
         minHeight: "100vh",
-        background: "#F8F9FA",
+        background: "var(--bg-app)",
         fontFamily: "'Inter', sans-serif",
         display: "flex",
         flexDirection: "column",
@@ -278,7 +278,7 @@ export function RegisterScreen() {
 
         <FormField
           label="Nama Lengkap"
-          icon={<User size={15} color="#94A3B8" />}
+          icon={<User size={15} color="var(--icon-muted)" />}
           error={submitted ? errors.namaLengkap : undefined}
         >
           <input
@@ -288,13 +288,13 @@ export function RegisterScreen() {
             onChange={(e) => set("namaLengkap", e.target.value)}
             style={inputStyle(submitted && !!errors.namaLengkap)}
             onFocus={(e) => { e.currentTarget.style.borderColor = "#10B981"; }}
-            onBlur={(e) => { e.currentTarget.style.borderColor = submitted && errors.namaLengkap ? "#EF4444" : "#E2E8F0"; }}
+            onBlur={(e) => { e.currentTarget.style.borderColor = submitted && errors.namaLengkap ? "#EF4444" : "var(--border-subtle)"; }}
           />
         </FormField>
 
         <FormField
           label="ID Operator"
-          icon={<BadgeCheck size={15} color="#94A3B8" />}
+          icon={<BadgeCheck size={15} color="var(--icon-muted)" />}
           error={submitted ? errors.idOperator : undefined}
           hint="4–20 karakter, boleh angka & simbol _ -"
         >
@@ -305,13 +305,13 @@ export function RegisterScreen() {
             onChange={(e) => set("idOperator", e.target.value.toLowerCase())}
             style={inputStyle(submitted && !!errors.idOperator)}
             onFocus={(e) => { e.currentTarget.style.borderColor = "#10B981"; }}
-            onBlur={(e) => { e.currentTarget.style.borderColor = submitted && errors.idOperator ? "#EF4444" : "#E2E8F0"; }}
+            onBlur={(e) => { e.currentTarget.style.borderColor = submitted && errors.idOperator ? "#EF4444" : "var(--border-subtle)"; }}
           />
         </FormField>
 
         <FormField
           label="Email"
-          icon={<Mail size={15} color="#94A3B8" />}
+          icon={<Mail size={15} color="var(--icon-muted)" />}
           error={submitted ? errors.email : undefined}
         >
           <input
@@ -321,7 +321,7 @@ export function RegisterScreen() {
             onChange={(e) => set("email", e.target.value)}
             style={inputStyle(submitted && !!errors.email)}
             onFocus={(e) => { e.currentTarget.style.borderColor = "#10B981"; }}
-            onBlur={(e) => { e.currentTarget.style.borderColor = submitted && errors.email ? "#EF4444" : "#E2E8F0"; }}
+            onBlur={(e) => { e.currentTarget.style.borderColor = submitted && errors.email ? "#EF4444" : "var(--border-subtle)"; }}
           />
         </FormField>
 
@@ -340,10 +340,10 @@ export function RegisterScreen() {
                 width: "100%",
                 padding: "13px 16px",
                 borderRadius: "12px",
-                border: `1.5px solid ${submitted && errors.role ? "#EF4444" : showRoleMenu ? "#10B981" : "#E2E8F0"}`,
-                background: "#F8FAFC",
+                border: `1.5px solid ${submitted && errors.role ? "#EF4444" : showRoleMenu ? "#10B981" : "var(--border-subtle)"}`,
+                background: "var(--bg-input)",
                 fontSize: "14px",
-                color: selectedRole ? "#1E293B" : "#94A3B8",
+                color: selectedRole ? "var(--text-primary)" : "var(--icon-muted)",
                 fontFamily: "'Inter', sans-serif",
                 cursor: "pointer",
                 textAlign: "left",
@@ -357,7 +357,7 @@ export function RegisterScreen() {
               {selectedRole ? (
                 <span>
                   <strong>{selectedRole.label}</strong>
-                  <span style={{ color: "#64748B", fontSize: "12px" }}> — {selectedRole.desc}</span>
+                  <span style={{ color: "var(--text-muted)", fontSize: "12px" }}> — {selectedRole.desc}</span>
                 </span>
               ) : (
                 "Pilih peran akun..."
@@ -366,7 +366,7 @@ export function RegisterScreen() {
                 animate={{ rotate: showRoleMenu ? 180 : 0 }}
                 transition={{ duration: 0.2 }}
               >
-                <ChevronDown size={16} color="#94A3B8" />
+                <ChevronDown size={16} color="var(--icon-muted)" />
               </motion.div>
             </button>
 
@@ -382,10 +382,10 @@ export function RegisterScreen() {
                     top: "calc(100% + 6px)",
                     left: 0,
                     right: 0,
-                    background: "#FFFFFF",
+                    background: "var(--bg-card)",
                     borderRadius: "14px",
                     boxShadow: "0px 8px 24px rgba(0,0,0,0.12)",
-                    border: "1px solid #E2E8F0",
+                    border: "1px solid var(--border-subtle)",
                     overflow: "hidden",
                     zIndex: 50,
                   }}
@@ -399,7 +399,7 @@ export function RegisterScreen() {
                         padding: "13px 16px",
                         background: form.role === r.value ? "#F0FDF4" : "transparent",
                         border: "none",
-                        borderBottom: "1px solid #F1F5F9",
+                        borderBottom: "1px solid var(--bg-hover)",
                         cursor: "pointer",
                         textAlign: "left",
                         display: "flex",
@@ -408,12 +408,12 @@ export function RegisterScreen() {
                         fontFamily: "'Inter', sans-serif",
                         transition: "background 0.15s",
                       }}
-                      onMouseEnter={(e) => { if (form.role !== r.value) e.currentTarget.style.background = "#F8FAFC"; }}
+                      onMouseEnter={(e) => { if (form.role !== r.value) e.currentTarget.style.background = "var(--bg-input)"; }}
                       onMouseLeave={(e) => { e.currentTarget.style.background = form.role === r.value ? "#F0FDF4" : "transparent"; }}
                     >
                       <div>
-                        <p style={{ margin: 0, fontSize: "14px", fontWeight: 600, color: "#1E293B" }}>{r.label}</p>
-                        <p style={{ margin: 0, fontSize: "12px", color: "#64748B", marginTop: "2px" }}>{r.desc}</p>
+                        <p style={{ margin: 0, fontSize: "14px", fontWeight: 600, color: "var(--text-primary)" }}>{r.label}</p>
+                        <p style={{ margin: 0, fontSize: "12px", color: "var(--text-muted)", marginTop: "2px" }}>{r.desc}</p>
                       </div>
                       {form.role === r.value && (
                         <CheckCircle2 size={16} color="#10B981" strokeWidth={2.5} />
@@ -431,7 +431,7 @@ export function RegisterScreen() {
 
         <FormField
           label="Kata Sandi"
-          icon={<Lock size={15} color="#94A3B8" />}
+          icon={<Lock size={15} color="var(--icon-muted)" />}
           error={submitted ? errors.password : undefined}
         >
           <div style={{ position: "relative" }}>
@@ -442,7 +442,7 @@ export function RegisterScreen() {
               onChange={(e) => set("password", e.target.value)}
               style={{ ...inputStyle(submitted && !!errors.password), paddingRight: "44px" }}
               onFocus={(e) => { e.currentTarget.style.borderColor = "#10B981"; }}
-              onBlur={(e) => { e.currentTarget.style.borderColor = submitted && errors.password ? "#EF4444" : "#E2E8F0"; }}
+              onBlur={(e) => { e.currentTarget.style.borderColor = submitted && errors.password ? "#EF4444" : "var(--border-subtle)"; }}
             />
             <button
               type="button"
@@ -468,7 +468,7 @@ export function RegisterScreen() {
                       flex: 1,
                       height: "4px",
                       borderRadius: "4px",
-                      background: l <= pwStrength.level ? pwStrength.color : "#E2E8F0",
+                      background: l <= pwStrength.level ? pwStrength.color : "var(--border-subtle)",
                       transition: "background 0.3s",
                     }}
                   />
@@ -483,7 +483,7 @@ export function RegisterScreen() {
 
         <FormField
           label="Konfirmasi Kata Sandi"
-          icon={<Lock size={15} color="#94A3B8" />}
+          icon={<Lock size={15} color="var(--icon-muted)" />}
           error={submitted ? errors.confirmPassword : undefined}
         >
           <div style={{ position: "relative" }}>
@@ -494,7 +494,7 @@ export function RegisterScreen() {
               onChange={(e) => set("confirmPassword", e.target.value)}
               style={{ ...inputStyle(submitted && !!errors.confirmPassword), paddingRight: "44px" }}
               onFocus={(e) => { e.currentTarget.style.borderColor = "#10B981"; }}
-              onBlur={(e) => { e.currentTarget.style.borderColor = submitted && errors.confirmPassword ? "#EF4444" : "#E2E8F0"; }}
+              onBlur={(e) => { e.currentTarget.style.borderColor = submitted && errors.confirmPassword ? "#EF4444" : "var(--border-subtle)"; }}
             />
             <button
               type="button"
@@ -533,9 +533,9 @@ export function RegisterScreen() {
             alignItems: "flex-start",
             gap: "12px",
             padding: "14px",
-            background: "#F8FAFC",
+            background: "var(--bg-input)",
             borderRadius: "12px",
-            border: `1.5px solid ${submitted && errors.agree ? "#EF4444" : "#E2E8F0"}`,
+            border: `1.5px solid ${submitted && errors.agree ? "#EF4444" : "var(--border-subtle)"}`,
             cursor: "pointer",
           }}
           onClick={() => set("agree", !form.agree)}
@@ -545,7 +545,7 @@ export function RegisterScreen() {
               width: "20px",
               height: "20px",
               borderRadius: "6px",
-              border: `2px solid ${form.agree ? "#10B981" : "#CBD5E1"}`,
+              border: `2px solid ${form.agree ? "#10B981" : "var(--border-strong)"}`,
               background: form.agree ? "#10B981" : "transparent",
               display: "flex",
               alignItems: "center",
@@ -563,7 +563,7 @@ export function RegisterScreen() {
               </motion.div>
             )}
           </div>
-          <p style={{ fontSize: "13px", color: "#475569", lineHeight: 1.5, margin: 0 }}>
+          <p style={{ fontSize: "13px", color: "var(--text-secondary)", lineHeight: 1.5, margin: 0 }}>
             Saya menyetujui{" "}
             <span style={{ color: "#10B981", fontWeight: 600 }}>Syarat & Ketentuan</span>
             {" "}serta{" "}
@@ -588,7 +588,7 @@ export function RegisterScreen() {
             background: "linear-gradient(135deg, #064E3B 0%, #10B981 100%)",
             border: "none",
             cursor: "pointer",
-            color: "#FFFFFF",
+            color: "var(--bg-card)",
             fontSize: "15px",
             fontWeight: 700,
             fontFamily: "'Inter', sans-serif",
@@ -601,7 +601,7 @@ export function RegisterScreen() {
         </motion.button>
 
         {/* Login link */}
-        <p style={{ textAlign: "center", fontSize: "13px", color: "#64748B", margin: "4px 0 0" }}>
+        <p style={{ textAlign: "center", fontSize: "13px", color: "var(--text-muted)", margin: "4px 0 0" }}>
           Sudah punya akun?{" "}
           <button
             onClick={() => navigate("/login")}
@@ -637,10 +637,10 @@ function SectionLabel({ icon, label }: { icon: string; label: string }) {
       }}
     >
       <span style={{ fontSize: "14px" }}>{icon}</span>
-      <span style={{ fontSize: "13px", fontWeight: 700, color: "#94A3B8", textTransform: "uppercase", letterSpacing: "0.7px" }}>
+      <span style={{ fontSize: "13px", fontWeight: 700, color: "var(--icon-muted)", textTransform: "uppercase", letterSpacing: "0.7px" }}>
         {label}
       </span>
-      <div style={{ flex: 1, height: "1px", background: "#E2E8F0" }} />
+      <div style={{ flex: 1, height: "1px", background: "var(--border-subtle)" }} />
     </div>
   );
 }
@@ -662,7 +662,7 @@ function FormField({
     <div>
       <div style={{ display: "flex", alignItems: "center", gap: "5px", marginBottom: "6px" }}>
         {icon}
-        <label style={{ fontSize: "12px", fontWeight: 600, color: "#64748B" }}>{label}</label>
+        <label style={{ fontSize: "12px", fontWeight: 600, color: "var(--text-muted)" }}>{label}</label>
       </div>
       {children}
       <AnimatePresence>
@@ -680,7 +680,7 @@ function FormField({
         )}
       </AnimatePresence>
       {!error && hint && (
-        <p style={{ fontSize: "11px", color: "#94A3B8", margin: "4px 0 0 2px" }}>{hint}</p>
+        <p style={{ fontSize: "11px", color: "var(--icon-muted)", margin: "4px 0 0 2px" }}>{hint}</p>
       )}
     </div>
   );
@@ -690,10 +690,10 @@ const inputStyle = (hasError: boolean): React.CSSProperties => ({
   width: "100%",
   padding: "13px 16px",
   borderRadius: "12px",
-  border: `1.5px solid ${hasError ? "#EF4444" : "#E2E8F0"}`,
-  background: "#F8FAFC",
+  border: `1.5px solid ${hasError ? "#EF4444" : "var(--border-subtle)"}`,
+  background: "var(--bg-input)",
   fontSize: "14px",
-  color: "#1E293B",
+  color: "var(--text-primary)",
   outline: "none",
   fontFamily: "'Inter', sans-serif",
   boxSizing: "border-box",
@@ -708,7 +708,7 @@ const eyeBtn: React.CSSProperties = {
   background: "none",
   border: "none",
   cursor: "pointer",
-  color: "#94A3B8",
+  color: "var(--icon-muted)",
   padding: "4px",
   display: "flex",
   alignItems: "center",

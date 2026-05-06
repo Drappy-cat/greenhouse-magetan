@@ -74,7 +74,7 @@ export function ScheduleScreen() {
       targetTemp: newTemp,
       iconType: "sun",
       iconColor: "#10B981",
-      iconBg: "#ECFDF5",
+      iconBg: "var(--bg-success-light)",
       active: true,
     };
     setSchedules([...schedules, newSchedule]);
@@ -90,7 +90,7 @@ export function ScheduleScreen() {
     <div
       style={{
         minHeight: "100vh",
-        background: "#F8F9FA",
+        background: "var(--bg-app)",
         fontFamily: "'Inter', sans-serif",
         paddingBottom: "80px",
         position: "relative",
@@ -100,12 +100,12 @@ export function ScheduleScreen() {
       <div
         style={{
           padding: "56px 20px 16px",
-          background: "#FFFFFF",
+          background: "var(--bg-card)",
           boxShadow: "0px 1px 4px rgba(0,0,0,0.04)",
         }}
       >
-        <span style={{ fontSize: "20px", fontWeight: 700, color: "#1E293B" }}>Jadwal Operasional</span>
-        <p style={{ fontSize: "13px", color: "#94A3B8", marginTop: "3px" }}>
+        <span style={{ fontSize: "20px", fontWeight: 700, color: "var(--text-primary)" }}>Jadwal Operasional</span>
+        <p style={{ fontSize: "13px", color: "var(--icon-muted)", marginTop: "3px" }}>
           Kelola jadwal otomasi greenhouse
         </p>
       </div>
@@ -115,7 +115,7 @@ export function ScheduleScreen() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "4px" }}>
           <div
             style={{
-              background: "#FFFFFF",
+              background: "var(--bg-card)",
               borderRadius: "12px",
               padding: "12px 14px",
               boxShadow: "0px 2px 6px rgba(0,0,0,0.04)",
@@ -126,15 +126,15 @@ export function ScheduleScreen() {
           >
             <Clock size={18} color="#3B82F6" />
             <div>
-              <p style={{ fontSize: "11px", color: "#94A3B8" }}>Jadwal Aktif</p>
-              <p style={{ fontSize: "16px", fontWeight: 700, color: "#1E293B" }}>
+              <p style={{ fontSize: "11px", color: "var(--icon-muted)" }}>Jadwal Aktif</p>
+              <p style={{ fontSize: "16px", fontWeight: 700, color: "var(--text-primary)" }}>
                 {schedules.filter((s) => s.active).length} / {schedules.length}
               </p>
             </div>
           </div>
           <div
             style={{
-              background: "#FFFFFF",
+              background: "var(--bg-card)",
               borderRadius: "12px",
               padding: "12px 14px",
               boxShadow: "0px 2px 6px rgba(0,0,0,0.04)",
@@ -145,7 +145,7 @@ export function ScheduleScreen() {
           >
             <div style={{ width: "8px", height: "8px", background: "#22C55E", borderRadius: "50%" }} />
             <div>
-              <p style={{ fontSize: "11px", color: "#94A3B8" }}>Status</p>
+              <p style={{ fontSize: "11px", color: "var(--icon-muted)" }}>Status</p>
               <p style={{ fontSize: "13px", fontWeight: 700, color: "#22C55E" }}>Berjalan</p>
             </div>
           </div>
@@ -153,7 +153,7 @@ export function ScheduleScreen() {
       </div>
 
       <div style={{ padding: "16px", display: "flex", flexDirection: "column", gap: "12px" }}>
-        <p style={{ fontSize: "15px", fontWeight: 700, color: "#1E293B" }}>Daftar Jadwal</p>
+        <p style={{ fontSize: "15px", fontWeight: 700, color: "var(--text-primary)" }}>Daftar Jadwal</p>
 
         {schedules.map((schedule) => {
           const Icon = schedule.iconType === "moon" ? Moon : Sun;
@@ -161,11 +161,11 @@ export function ScheduleScreen() {
             <div
               key={schedule.id}
               style={{
-                background: "#FFFFFF",
+                background: "var(--bg-card)",
                 borderRadius: "16px",
                 padding: "20px",
                 boxShadow: "0px 4px 10px rgba(0,0,0,0.05)",
-                border: schedule.active ? "1.5px solid #D1FAE5" : "1.5px solid #F1F5F9",
+                border: schedule.active ? "1.5px solid #D1FAE5" : "1.5px solid var(--bg-hover)",
                 transition: "border 0.3s",
               }}
             >
@@ -190,16 +190,16 @@ export function ScheduleScreen() {
 
                   {/* Details */}
                   <div style={{ flex: 1 }}>
-                    <p style={{ fontSize: "16px", fontWeight: 700, color: "#1E293B", marginBottom: "6px" }}>
+                    <p style={{ fontSize: "16px", fontWeight: 700, color: "var(--text-primary)", marginBottom: "6px" }}>
                       {schedule.title}
                     </p>
                     <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
                       <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                        <Clock size={13} color="#94A3B8" />
-                        <span style={{ fontSize: "13px", color: "#64748B" }}>Waktu: {schedule.time}</span>
+                        <Clock size={13} color="var(--icon-muted)" />
+                        <span style={{ fontSize: "13px", color: "var(--text-muted)" }}>Waktu: {schedule.time}</span>
                       </div>
                       <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                        <span style={{ fontSize: "13px", color: "#64748B" }}>
+                        <span style={{ fontSize: "13px", color: "var(--text-muted)" }}>
                           🌡 Suhu Target: <strong>{schedule.targetTemp}°C</strong>
                         </span>
                       </div>
@@ -209,8 +209,8 @@ export function ScheduleScreen() {
                     <div className="no-invert" style={{ marginTop: "10px" }}>
                       <span
                         style={{
-                          background: schedule.active ? "#DCFCE7" : "#F1F5F9",
-                          color: schedule.active ? "#16A34A" : "#64748B",
+                          background: schedule.active ? "#DCFCE7" : "var(--bg-hover)",
+                          color: schedule.active ? "#16A34A" : "var(--text-muted)",
                           borderRadius: "8px",
                           padding: "3px 10px",
                           fontSize: "11px",
@@ -231,7 +231,7 @@ export function ScheduleScreen() {
                     width: "48px",
                     height: "28px",
                     borderRadius: "14px",
-                    background: schedule.active ? "#22C55E" : "#CBD5E1",
+                    background: schedule.active ? "#22C55E" : "var(--border-strong)",
                     cursor: "pointer",
                     position: "relative",
                     transition: "background 0.3s ease",
@@ -261,7 +261,7 @@ export function ScheduleScreen() {
         {/* Info Card */}
         <div
           style={{
-            background: "#EFF6FF",
+            background: "var(--bg-primary-light)",
             borderRadius: "14px",
             padding: "14px 16px",
             border: "1px solid #DBEAFE",
@@ -329,7 +329,7 @@ export function ScheduleScreen() {
               style={{
                 position: "fixed",
                 bottom: 0, left: 0, right: 0,
-                background: "#FFFFFF",
+                background: "var(--bg-card)",
                 borderTopLeftRadius: "28px",
                 borderTopRightRadius: "28px",
                 padding: "24px 24px 32px",
@@ -339,11 +339,11 @@ export function ScheduleScreen() {
               }}
             >
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
-                <h3 style={{ margin: 0, fontSize: "18px", fontWeight: 800, color: "#1E293B" }}>Tambah Jadwal Baru</h3>
+                <h3 style={{ margin: 0, fontSize: "18px", fontWeight: 800, color: "var(--text-primary)" }}>Tambah Jadwal Baru</h3>
                 <button
                   onClick={() => setIsModalOpen(false)}
                   style={{
-                    background: "#F1F5F9",
+                    background: "var(--bg-hover)",
                     border: "none",
                     borderRadius: "50%",
                     width: "32px",
@@ -352,7 +352,7 @@ export function ScheduleScreen() {
                     alignItems: "center",
                     justifyContent: "center",
                     cursor: "pointer",
-                    color: "#64748B",
+                    color: "var(--text-muted)",
                   }}
                 >
                   <X size={18} strokeWidth={2.5} />
@@ -361,7 +361,7 @@ export function ScheduleScreen() {
 
               <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
                 <div>
-                  <label style={{ fontSize: "13px", fontWeight: 600, color: "#64748B", marginBottom: "6px", display: "block" }}>Nama Jadwal</label>
+                  <label style={{ fontSize: "13px", fontWeight: 600, color: "var(--text-muted)", marginBottom: "6px", display: "block" }}>Nama Jadwal</label>
                   <input
                     type="text"
                     value={newTitle}
@@ -369,7 +369,7 @@ export function ScheduleScreen() {
                     placeholder="Contoh: Perawatan Pagi"
                     style={{
                       width: "100%", padding: "13px 16px", borderRadius: "12px",
-                      border: "1.5px solid #E2E8F0", background: "#F8FAFC", outline: "none",
+                      border: "1.5px solid var(--border-subtle)", background: "var(--bg-input)", outline: "none",
                       fontFamily: "'Inter', sans-serif", fontSize: "14px", boxSizing: "border-box"
                     }}
                   />
@@ -377,27 +377,27 @@ export function ScheduleScreen() {
                 
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
                   <div>
-                    <label style={{ fontSize: "13px", fontWeight: 600, color: "#64748B", marginBottom: "6px", display: "block" }}>Jam Mulai</label>
+                    <label style={{ fontSize: "13px", fontWeight: 600, color: "var(--text-muted)", marginBottom: "6px", display: "block" }}>Jam Mulai</label>
                     <input
                       type="time"
                       value={newStartTime}
                       onChange={(e) => setNewStartTime(e.target.value)}
                       style={{
                         width: "100%", padding: "13px 16px", borderRadius: "12px",
-                        border: "1.5px solid #E2E8F0", background: "#F8FAFC", outline: "none",
+                        border: "1.5px solid var(--border-subtle)", background: "var(--bg-input)", outline: "none",
                         fontFamily: "'Inter', sans-serif", fontSize: "14px", boxSizing: "border-box"
                       }}
                     />
                   </div>
                   <div>
-                    <label style={{ fontSize: "13px", fontWeight: 600, color: "#64748B", marginBottom: "6px", display: "block" }}>Jam Selesai</label>
+                    <label style={{ fontSize: "13px", fontWeight: 600, color: "var(--text-muted)", marginBottom: "6px", display: "block" }}>Jam Selesai</label>
                     <input
                       type="time"
                       value={newEndTime}
                       onChange={(e) => setNewEndTime(e.target.value)}
                       style={{
                         width: "100%", padding: "13px 16px", borderRadius: "12px",
-                        border: "1.5px solid #E2E8F0", background: "#F8FAFC", outline: "none",
+                        border: "1.5px solid var(--border-subtle)", background: "var(--bg-input)", outline: "none",
                         fontFamily: "'Inter', sans-serif", fontSize: "14px", boxSizing: "border-box"
                       }}
                     />
@@ -406,8 +406,8 @@ export function ScheduleScreen() {
 
                 <div>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
-                    <label style={{ fontSize: "13px", fontWeight: 600, color: "#64748B" }}>Target Suhu</label>
-                    <span style={{ background: "#EFF6FF", color: "#3B82F6", padding: "3px 10px", borderRadius: "8px", fontSize: "13px", fontWeight: 700 }}>{newTemp}°C</span>
+                    <label style={{ fontSize: "13px", fontWeight: 600, color: "var(--text-muted)" }}>Target Suhu</label>
+                    <span style={{ background: "var(--bg-primary-light)", color: "#3B82F6", padding: "3px 10px", borderRadius: "8px", fontSize: "13px", fontWeight: 700 }}>{newTemp}°C</span>
                   </div>
                   <input
                     type="range"
@@ -418,8 +418,8 @@ export function ScheduleScreen() {
                     style={{ width: "100%", accentColor: "#3B82F6", height: "6px", cursor: "pointer" }}
                   />
                   <div style={{ display: "flex", justifyContent: "space-between", marginTop: "4px" }}>
-                    <span style={{ fontSize: "11px", color: "#94A3B8" }}>15°C</span>
-                    <span style={{ fontSize: "11px", color: "#94A3B8" }}>45°C</span>
+                    <span style={{ fontSize: "11px", color: "var(--icon-muted)" }}>15°C</span>
+                    <span style={{ fontSize: "11px", color: "var(--icon-muted)" }}>45°C</span>
                   </div>
                 </div>
 

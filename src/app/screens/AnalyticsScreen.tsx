@@ -44,8 +44,8 @@ const activityLog = [
   {
     id: 3,
     icon: Flame,
-    iconColor: "#64748B",
-    iconBg: "#F8F9FA",
+    iconColor: "var(--text-muted)",
+    iconBg: "var(--bg-app)",
     time: "06:15 WIB",
     desc: "Pemanas dinonaktifkan. Suhu pagi mencapai target 24°C.",
     type: "info",
@@ -55,10 +55,10 @@ const activityLog = [
 const filters = ["Hari Ini", "7 Hari", "30 Hari", "Lainnya"];
 const activityFilters = ["Semua", "Peringatan", "Sukses", "Info"];
 const activityFilterColors: { [key: string]: { border: string, bg: string, text: string } } = {
-  "Semua": { border: "#E2E8F0", bg: "#FFFFFF", text: "#64748B" },
+  "Semua": { border: "var(--border-subtle)", bg: "var(--bg-card)", text: "var(--text-muted)" },
   "Peringatan": { border: "#F97316", bg: "#FFF7ED", text: "#F97316" },
   "Sukses": { border: "#22C55E", bg: "#F0FDF4", text: "#22C55E" },
-  "Info": { border: "#64748B", bg: "#F8F9FA", text: "#64748B" },
+  "Info": { border: "var(--text-muted)", bg: "var(--bg-app)", text: "var(--text-muted)" },
 };
 
 const CustomTooltip = ({ active, payload, label }: any) => {
@@ -73,7 +73,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
           fontFamily: "'Inter', sans-serif",
         }}
       >
-        <p style={{ fontSize: "12px", color: "#64748B", marginBottom: "6px", fontWeight: 600 }}>{label}</p>
+        <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "6px", fontWeight: 600 }}>{label}</p>
         {payload.map((p: any) => (
           <div key={p.name} style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "2px" }}>
             <span
@@ -85,7 +85,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
                 display: "inline-block",
               }}
             />
-            <span style={{ fontSize: "13px", fontWeight: 600, color: "#1E293B" }}>
+            <span style={{ fontSize: "13px", fontWeight: 600, color: "var(--text-primary)" }}>
               {p.value}
               {p.name === "suhu" ? "°C" : "%"}
             </span>
@@ -165,7 +165,7 @@ export function AnalyticsScreen() {
     <div
       style={{
         minHeight: "100vh",
-        background: "#F8F9FA",
+        background: "var(--bg-app)",
         fontFamily: "'Inter', sans-serif",
         paddingBottom: "80px",
         position: "relative",
@@ -175,11 +175,11 @@ export function AnalyticsScreen() {
       <div
         style={{
           padding: "56px 20px 16px",
-          background: "#FFFFFF",
+          background: "var(--bg-card)",
           boxShadow: "0px 1px 4px rgba(0,0,0,0.04)",
         }}
       >
-        <span style={{ fontSize: "20px", fontWeight: 700, color: "#1E293B" }}>Riwayat Data</span>
+        <span style={{ fontSize: "20px", fontWeight: 700, color: "var(--text-primary)" }}>Riwayat Data</span>
       </div>
 
       <div style={{ padding: "20px 16px", display: "flex", flexDirection: "column", gap: "16px" }}>
@@ -193,9 +193,9 @@ export function AnalyticsScreen() {
               style={{
                 padding: "8px 18px",
                 borderRadius: "20px",
-                border: activeFilter === f ? "none" : "1.5px solid #E2E8F0",
-                background: activeFilter === f ? "#3B82F6" : "#FFFFFF",
-                color: activeFilter === f ? "white" : "#64748B",
+                border: activeFilter === f ? "none" : "1.5px solid var(--border-subtle)",
+                background: activeFilter === f ? "#3B82F6" : "var(--bg-card)",
+                color: activeFilter === f ? "white" : "var(--text-muted)",
                 fontSize: "13px",
                 fontWeight: activeFilter === f ? 700 : 400,
                 cursor: "pointer",
@@ -213,14 +213,14 @@ export function AnalyticsScreen() {
         {/* Chart Card */}
         <div
           style={{
-            background: "#FFFFFF",
+            background: "var(--bg-card)",
             borderRadius: "16px",
             padding: "18px 16px 12px",
             boxShadow: "0px 4px 10px rgba(0,0,0,0.05)",
           }}
         >
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
-            <span style={{ fontSize: "15px", fontWeight: 700, color: "#1E293B" }}>Grafik Sensor</span>
+            <span style={{ fontSize: "15px", fontWeight: 700, color: "var(--text-primary)" }}>Grafik Sensor</span>
             <div style={{ display: "flex", gap: "12px" }}>
               <div
                 style={{ display: "flex", alignItems: "center", gap: "5px", cursor: "pointer" }}
@@ -230,12 +230,12 @@ export function AnalyticsScreen() {
                   style={{
                     width: "10px",
                     height: "3px",
-                    background: showSuhu ? "#F97316" : "#E2E8F0",
+                    background: showSuhu ? "#F97316" : "var(--border-subtle)",
                     borderRadius: "2px",
                     display: "inline-block",
                   }}
                 />
-                <span style={{ fontSize: "11px", color: "#64748B", fontWeight: 500 }}>Suhu</span>
+                <span style={{ fontSize: "11px", color: "var(--text-muted)", fontWeight: 500 }}>Suhu</span>
               </div>
               <div
                 style={{ display: "flex", alignItems: "center", gap: "5px", cursor: "pointer" }}
@@ -245,12 +245,12 @@ export function AnalyticsScreen() {
                   style={{
                     width: "10px",
                     height: "3px",
-                    background: showKelembaban ? "#3B82F6" : "#E2E8F0",
+                    background: showKelembaban ? "#3B82F6" : "var(--border-subtle)",
                     borderRadius: "2px",
                     display: "inline-block",
                   }}
                 />
-                <span style={{ fontSize: "11px", color: "#64748B", fontWeight: 500 }}>Kelembaban</span>
+                <span style={{ fontSize: "11px", color: "var(--text-muted)", fontWeight: 500 }}>Kelembaban</span>
               </div>
             </div>
           </div>
@@ -267,15 +267,15 @@ export function AnalyticsScreen() {
                   <stop offset="95%" stopColor="#3B82F6" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#F1F5F9" vertical={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-hover)" vertical={false} />
               <XAxis
                 dataKey="time"
-                tick={{ fontSize: 11, fill: "#94A3B8", fontFamily: "'Inter', sans-serif" }}
+                tick={{ fontSize: 11, fill: "var(--icon-muted)", fontFamily: "'Inter', sans-serif" }}
                 axisLine={false}
                 tickLine={false}
               />
               <YAxis
-                tick={{ fontSize: 11, fill: "#94A3B8", fontFamily: "'Inter', sans-serif" }}
+                tick={{ fontSize: 11, fill: "var(--icon-muted)", fontFamily: "'Inter', sans-serif" }}
                 axisLine={false}
                 tickLine={false}
               />
@@ -318,7 +318,7 @@ export function AnalyticsScreen() {
             <div
               key={stat.label}
               style={{
-                background: "#FFFFFF",
+                background: "var(--bg-card)",
                 borderRadius: "12px",
                 padding: "12px 10px",
                 boxShadow: "0px 2px 6px rgba(0,0,0,0.04)",
@@ -326,7 +326,7 @@ export function AnalyticsScreen() {
               }}
             >
               <p style={{ fontSize: "18px", fontWeight: 800, color: stat.color, marginBottom: "2px" }}>{stat.value}</p>
-              <p style={{ fontSize: "10px", color: "#94A3B8", fontWeight: 400, lineHeight: "1.3" }}>{stat.label}</p>
+              <p style={{ fontSize: "10px", color: "var(--icon-muted)", fontWeight: 400, lineHeight: "1.3" }}>{stat.label}</p>
             </div>
           ))}
         </div>
@@ -334,7 +334,7 @@ export function AnalyticsScreen() {
         {/* Activity Log */}
         <div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '14px' }}>
-            <p style={{ fontSize: "15px", fontWeight: 700, color: "#1E293B" }}>
+            <p style={{ fontSize: "15px", fontWeight: 700, color: "var(--text-primary)" }}>
               Aktivitas Terakhir
             </p>
             <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
@@ -346,9 +346,9 @@ export function AnalyticsScreen() {
                   style={{
                     padding: "4px 10px",
                     borderRadius: "12px",
-                    border: `1.5px solid ${activeActivityFilter === f ? activityFilterColors[f].border : '#E2E8F0'}`,
-                    background: activeActivityFilter === f ? activityFilterColors[f].bg : '#FFFFFF',
-                    color: activeActivityFilter === f ? activityFilterColors[f].text : '#64748B',
+                    border: `1.5px solid ${activeActivityFilter === f ? activityFilterColors[f].border : 'var(--border-subtle)'}`,
+                    background: activeActivityFilter === f ? activityFilterColors[f].bg : 'var(--bg-card)',
+                    color: activeActivityFilter === f ? activityFilterColors[f].text : 'var(--text-muted)',
                     fontSize: "11px",
                     fontWeight: 600,
                     cursor: "pointer",
@@ -369,7 +369,7 @@ export function AnalyticsScreen() {
                 <div
                   key={item.id}
                   style={{
-                    background: "#FFFFFF",
+                    background: "var(--bg-card)",
                     borderRadius: "14px",
                     padding: "14px",
                     boxShadow: "0px 2px 8px rgba(0,0,0,0.04)",
@@ -394,10 +394,10 @@ export function AnalyticsScreen() {
                     <Icon size={18} color={item.iconColor} strokeWidth={2} />
                   </div>
                   <div style={{ flex: 1 }}>
-                    <p style={{ fontSize: "11px", fontWeight: 600, color: "#94A3B8", marginBottom: "3px" }}>
+                    <p style={{ fontSize: "11px", fontWeight: 600, color: "var(--icon-muted)", marginBottom: "3px" }}>
                       {item.time}
                     </p>
-                    <p style={{ fontSize: "13px", fontWeight: 400, color: "#475569", lineHeight: "1.4" }}>
+                    <p style={{ fontSize: "13px", fontWeight: 400, color: "var(--text-secondary)", lineHeight: "1.4" }}>
                       {item.desc}
                     </p>
                   </div>
@@ -432,31 +432,31 @@ export function AnalyticsScreen() {
             boxShadow: "0px 8px 24px rgba(0,0,0,0.15)",
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-              <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 700, color: '#1E293B' }}>Pilih Rentang Tanggal</h3>
+              <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 700, color: 'var(--text-primary)' }}>Pilih Rentang Tanggal</h3>
               <button onClick={() => setDateModalOpen(false)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: '4px' }}>
-                <X size={20} color="#64748B" />
+                <X size={20} color="var(--text-muted)" />
               </button>
             </div>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div>
-                <label style={{ fontSize: '13px', fontWeight: 500, color: '#475569', display: 'block', marginBottom: '6px' }}>Tanggal Mulai</label>
+                <label style={{ fontSize: '13px', fontWeight: 500, color: 'var(--text-secondary)', display: 'block', marginBottom: '6px' }}>Tanggal Mulai</label>
                 <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} style={{
                   width: '100%',
                   padding: '10px 12px',
                   borderRadius: '8px',
-                  border: '1.5px solid #E2E8F0',
+                  border: '1.5px solid var(--border-subtle)',
                   fontSize: '14px',
                   fontFamily: "'Inter', sans-serif",
                 }}/>
               </div>
               <div>
-                <label style={{ fontSize: '13px', fontWeight: 500, color: '#475569', display: 'block', marginBottom: '6px' }}>Tanggal Selesai</label>
+                <label style={{ fontSize: '13px', fontWeight: 500, color: 'var(--text-secondary)', display: 'block', marginBottom: '6px' }}>Tanggal Selesai</label>
                 <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} style={{
                   width: '100%',
                   padding: '10px 12px',
                   borderRadius: '8px',
-                  border: '1.5px solid #E2E8F0',
+                  border: '1.5px solid var(--border-subtle)',
                   fontSize: '14px',
                   fontFamily: "'Inter', sans-serif",
                 }}/>
@@ -468,9 +468,9 @@ export function AnalyticsScreen() {
                 flex: 1,
                 padding: '12px',
                 borderRadius: '12px',
-                border: '1.5px solid #E2E8F0',
-                background: '#FFFFFF',
-                color: '#475569',
+                border: '1.5px solid var(--border-subtle)',
+                background: 'var(--bg-card)',
+                color: 'var(--text-secondary)',
                 fontSize: '14px',
                 fontWeight: 600,
                 cursor: 'pointer',
