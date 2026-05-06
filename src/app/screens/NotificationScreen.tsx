@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -22,7 +22,7 @@ interface Notif {
   message: string;
   time: string;
   read: boolean;
-  icon: React.ElementType;
+  iconName: "ThermometerSun" | "Droplets" | "CheckCircle2" | "AlertTriangle" | "Wind" | "Info";
 }
 
 const initialNotifications: Notif[] = [
@@ -33,7 +33,7 @@ const initialNotifications: Notif[] = [
     message: "Suhu ruangan mencapai 32°C, melebihi batas optimal 30°C. Kipas sirkulasi diaktifkan otomatis.",
     time: "14:05",
     read: false,
-    icon: ThermometerSun,
+    iconName: "ThermometerSun",
   },
   {
     id: 2,
@@ -42,7 +42,7 @@ const initialNotifications: Notif[] = [
     message: "Kelembaban turun ke 52%, di bawah batas minimal 55%. Sistem irigasi mikro diaktifkan.",
     time: "11:30",
     read: false,
-    icon: Droplets,
+    iconName: "Droplets",
   },
   {
     id: 3,
@@ -51,7 +51,7 @@ const initialNotifications: Notif[] = [
     message: "Semua aktuator berjalan normal. Kondisi greenhouse optimal untuk pertumbuhan tanaman.",
     time: "08:00",
     read: true,
-    icon: CheckCircle2,
+    iconName: "CheckCircle2",
   },
   {
     id: 4,
@@ -60,7 +60,7 @@ const initialNotifications: Notif[] = [
     message: "Sensor karbon dioksida tidak merespons selama 5 menit. Periksa koneksi perangkat.",
     time: "Kemarin 22:15",
     read: true,
-    icon: AlertTriangle,
+    iconName: "AlertTriangle",
   },
   {
     id: 5,
@@ -69,7 +69,7 @@ const initialNotifications: Notif[] = [
     message: "Penyiraman zona A & B berhasil dilakukan sesuai jadwal pukul 06:00 WIB.",
     time: "Kemarin 06:02",
     read: true,
-    icon: Wind,
+    iconName: "Wind",
   },
   {
     id: 6,
@@ -78,7 +78,7 @@ const initialNotifications: Notif[] = [
     message: "Firmware perangkat IoT berhasil diperbarui ke v2.4.1. Restart otomatis selesai.",
     time: "2 hari lalu",
     read: true,
-    icon: Info,
+    iconName: "Info",
   },
 ];
 
@@ -91,8 +91,23 @@ const typeStyles: Record<NotifType, { bg: string; iconBg: string; iconColor: str
 
 export function NotificationScreen() {
   const navigate = useNavigate();
-  const [notifications, setNotifications] = useState<Notif[]>(initialNotifications);
+  const [notifications, setNotifications] = useState<Notif[]>(() => {
+    const saved = localStorage.getItem("gh_notifications");
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        // fallback
+      }
+    }
+    return initialNotifications;
+  });
+
   const [showConfirm, setShowConfirm] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem("gh_notifications", JSON.stringify(notifications));
+  }, [notifications]);
 
   const unreadCount = notifications.filter((n) => !n.read).length;
 
@@ -447,7 +462,9 @@ function NotifCard({
   onRead: (id: number) => void;
 }) {
   const style = typeStyles[notif.type];
-  const Icon = notif.icon;
+  
+  const iconMap = { ThermometerSun, Droplets, CheckCircle2, AlertTriangle, Wind, Info };
+  const Icon = iconMap[notif.iconName];
 
   return (
     <motion.div
