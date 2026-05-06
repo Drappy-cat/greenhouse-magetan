@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   AreaChart,
   Area,
@@ -98,14 +98,25 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 };
 
 export function AnalyticsScreen() {
-  const [activeFilter, setActiveFilter] = useState("Hari Ini");
-  const [activeActivityFilter, setActiveActivityFilter] = useState("Semua");
+  const [activeFilter, setActiveFilter] = useState(() => localStorage.getItem("gh_analytics_filter") || "Hari Ini");
+  const [activeActivityFilter, setActiveActivityFilter] = useState(() => localStorage.getItem("gh_analytics_activity_filter") || "Semua");
   const [isDateModalOpen, setDateModalOpen] = useState(false);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [showSuhu, setShowSuhu] = useState(true);
-  const [showKelembaban, setShowKelembaban] = useState(true);
+  const [showSuhu, setShowSuhu] = useState(() => {
+    const saved = localStorage.getItem("gh_analytics_show_suhu");
+    return saved !== null ? saved === "true" : true;
+  });
+  const [showKelembaban, setShowKelembaban] = useState(() => {
+    const saved = localStorage.getItem("gh_analytics_show_kelembaban");
+    return saved !== null ? saved === "true" : true;
+  });
   const [exportSuccess, setExportSuccess] = useState(false);
+
+  useEffect(() => { localStorage.setItem("gh_analytics_filter", activeFilter); }, [activeFilter]);
+  useEffect(() => { localStorage.setItem("gh_analytics_activity_filter", activeActivityFilter); }, [activeActivityFilter]);
+  useEffect(() => { localStorage.setItem("gh_analytics_show_suhu", showSuhu.toString()); }, [showSuhu]);
+  useEffect(() => { localStorage.setItem("gh_analytics_show_kelembaban", showKelembaban.toString()); }, [showKelembaban]);
 
   const handleExportCSV = () => {
     let csvContent = "Waktu,Suhu (°C),Kelembaban (%)\n";

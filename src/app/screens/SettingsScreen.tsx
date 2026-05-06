@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useThemeTransition } from "../hooks/useThemeTransition";
 import { User, Moon, Cpu, Thermometer, Droplets, LogOut, ChevronRight, Wifi, Shield } from "lucide-react";
@@ -9,9 +9,22 @@ export function SettingsScreen() {
   const navigate = useNavigate();
   const { theme, toggleTheme } = useThemeTransition();
   const darkMode = theme === "dark";
-  const [simEnabled, setSimEnabled] = useState(true);
-  const [simTemp, setSimTemp] = useState(28);
-  const [simHumidity, setSimHumidity] = useState(65);
+  const [simEnabled, setSimEnabled] = useState(() => {
+    const saved = localStorage.getItem("gh_settings_sim_enabled");
+    return saved !== null ? saved === "true" : true;
+  });
+  const [simTemp, setSimTemp] = useState(() => {
+    const saved = localStorage.getItem("gh_settings_sim_temp");
+    return saved ? parseInt(saved, 10) : 28;
+  });
+  const [simHumidity, setSimHumidity] = useState(() => {
+    const saved = localStorage.getItem("gh_settings_sim_humidity");
+    return saved ? parseInt(saved, 10) : 65;
+  });
+
+  useEffect(() => { localStorage.setItem("gh_settings_sim_enabled", simEnabled.toString()); }, [simEnabled]);
+  useEffect(() => { localStorage.setItem("gh_settings_sim_temp", simTemp.toString()); }, [simTemp]);
+  useEffect(() => { localStorage.setItem("gh_settings_sim_humidity", simHumidity.toString()); }, [simHumidity]);
 
   const handleLogout = () => {
     navigate("/login");

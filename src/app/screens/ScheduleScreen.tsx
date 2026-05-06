@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Plus, Sun, Moon, Clock, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { BottomNav } from "../components/BottomNav";
@@ -8,35 +8,49 @@ interface Schedule {
   title: string;
   time: string;
   targetTemp: number;
-  icon: typeof Sun;
+  iconType: "sun" | "moon";
   iconColor: string;
   iconBg: string;
   active: boolean;
 }
 
 export function ScheduleScreen() {
-  const [schedules, setSchedules] = useState<Schedule[]>([
-    {
-      id: 1,
-      title: "Jadwal Siang",
-      time: "06:00 – 18:00",
-      targetTemp: 24,
-      icon: Sun,
-      iconColor: "#F97316",
-      iconBg: "#FFF7ED",
-      active: true,
-    },
-    {
-      id: 2,
-      title: "Jadwal Malam",
-      time: "18:00 – 06:00",
-      targetTemp: 27,
-      icon: Moon,
-      iconColor: "#6366F1",
-      iconBg: "#EEF2FF",
-      active: false,
-    },
-  ]);
+  const [schedules, setSchedules] = useState<Schedule[]>(() => {
+    const saved = localStorage.getItem("gh_schedules");
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        // ignore
+      }
+    }
+    return [
+      {
+        id: 1,
+        title: "Jadwal Siang",
+        time: "06:00 – 18:00",
+        targetTemp: 24,
+        iconType: "sun",
+        iconColor: "#F97316",
+        iconBg: "#FFF7ED",
+        active: true,
+      },
+      {
+        id: 2,
+        title: "Jadwal Malam",
+        time: "18:00 – 06:00",
+        targetTemp: 27,
+        iconType: "moon",
+        iconColor: "#6366F1",
+        iconBg: "#EEF2FF",
+        active: false,
+      },
+    ];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("gh_schedules", JSON.stringify(schedules));
+  }, [schedules]);
 
   const toggleSchedule = (id: number) => {
     setSchedules((prev) =>
@@ -58,7 +72,7 @@ export function ScheduleScreen() {
       title: newTitle,
       time: `${newStartTime} – ${newEndTime}`,
       targetTemp: newTemp,
-      icon: Sun,
+      iconType: "sun",
       iconColor: "#10B981",
       iconBg: "#ECFDF5",
       active: true,
@@ -142,7 +156,7 @@ export function ScheduleScreen() {
         <p style={{ fontSize: "15px", fontWeight: 700, color: "#1E293B" }}>Daftar Jadwal</p>
 
         {schedules.map((schedule) => {
-          const Icon = schedule.icon;
+          const Icon = schedule.iconType === "moon" ? Moon : Sun;
           return (
             <div
               key={schedule.id}

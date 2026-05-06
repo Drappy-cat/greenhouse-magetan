@@ -54,10 +54,13 @@ export function LoginScreen() {
   };
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
       style={{
         minHeight: "100vh",
-        background: "#F8F9FA",
+        background: isDark ? "#0F172A" : "#F8F9FA",
         fontFamily: "'Inter', sans-serif",
         display: "flex",
         flexDirection: "column",
@@ -66,9 +69,27 @@ export function LoginScreen() {
         padding: "0 24px 36px",
         boxSizing: "border-box",
         position: "relative",
+        overflow: "hidden",
       }}
     >
-      <button
+      {/* ── COLORFUL SPLASH TO LOGIN TRANSITION (RIPPLE EFFECT) ── */}
+      <motion.div
+        initial={{ clipPath: "circle(150% at 50% 50%)" }}
+        animate={{ clipPath: "circle(0% at 50% 0%)" }}
+        transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(155deg, #064E3B 0%, #065F46 30%, #047857 60%, #059669 85%, #10B981 100%)",
+          zIndex: 100,
+          pointerEvents: "none",
+        }}
+      />
+
+      <motion.button
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.5, duration: 0.4 }}
         onClick={(e) => toggleTheme(e)}
         style={{
           position: "absolute",
@@ -89,7 +110,7 @@ export function LoginScreen() {
         }}
       >
         {isDark ? <Sun size={20} /> : <Moon size={20} />}
-      </button>
+      </motion.button>
 
       {/* ── ERROR NOTIFICATION TOAST ── */}
       <AnimatePresence>
@@ -134,7 +155,10 @@ export function LoginScreen() {
       </AnimatePresence>
 
       {/* ── TOP SECTION: Logo & Branding ── */}
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 0.6, ease: "easeOut" }}
         style={{
           width: "100%",
           display: "flex",
@@ -142,6 +166,7 @@ export function LoginScreen() {
           alignItems: "center",
           paddingTop: "64px",
           paddingBottom: "24px",
+          zIndex: 10,
         }}
       >
         <div
@@ -170,7 +195,7 @@ export function LoginScreen() {
           style={{
             fontSize: "24px",
             fontWeight: 800,
-            color: "#0F172A",
+            color: isDark ? "#FFFFFF" : "#0F172A",
             letterSpacing: "-0.6px",
             lineHeight: 1.2,
             margin: "0 0 6px",
@@ -182,8 +207,8 @@ export function LoginScreen() {
         <span
           style={{
             display: "inline-block",
-            background: "#ECFDF5",
-            color: "#15803D",
+            background: isDark ? "rgba(20, 184, 166, 0.15)" : "#ECFDF5",
+            color: isDark ? "#2DD4BF" : "#15803D",
             borderRadius: "20px",
             padding: "4px 14px",
             fontSize: "12px",
@@ -192,23 +217,27 @@ export function LoginScreen() {
         >
           Sistem Otomasi berbasis Fuzzy Logic
         </span>
-      </div>
+      </motion.div>
 
       {/* ── MIDDLE SECTION: Tab Card ── */}
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.45, duration: 0.6, ease: "easeOut" }}
         style={{
           width: "100%",
-          background: "#FFFFFF",
+          background: isDark ? "#1E293B" : "#FFFFFF",
           borderRadius: "24px",
-          boxShadow: "0px 4px 24px rgba(0,0,0,0.07)",
+          boxShadow: isDark ? "0px 10px 30px rgba(0,0,0,0.3)" : "0px 4px 24px rgba(0,0,0,0.07)",
           overflow: "hidden",
+          zIndex: 10,
         }}
       >
         {/* Tab switcher */}
         <div
           style={{
             display: "flex",
-            background: "#F1F5F9",
+            background: isDark ? "#0F172A" : "#F1F5F9",
             margin: "20px 20px 0",
             borderRadius: "14px",
             padding: "4px",
@@ -233,9 +262,15 @@ export function LoginScreen() {
                 justifyContent: "center",
                 gap: "7px",
                 transition: "background 0.25s, color 0.25s, box-shadow 0.25s",
-                background: activeTab === tab ? "#FFFFFF" : "transparent",
-                color: activeTab === tab ? "#1E293B" : "#94A3B8",
-                boxShadow: activeTab === tab ? "0px 2px 8px rgba(0,0,0,0.1)" : "none",
+                background: activeTab === tab 
+                  ? (isDark ? "#334155" : "#FFFFFF") 
+                  : "transparent",
+                color: activeTab === tab 
+                  ? (isDark ? "#FFFFFF" : "#1E293B") 
+                  : (isDark ? "#64748B" : "#94A3B8"),
+                boxShadow: activeTab === tab 
+                  ? (isDark ? "0px 2px 8px rgba(0,0,0,0.3)" : "0px 2px 8px rgba(0,0,0,0.1)") 
+                  : "none",
               }}
             >
               {tab === "password" ? (
@@ -283,11 +318,16 @@ export function LoginScreen() {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
+      </motion.div>
 
       {/* ── BOTTOM SECTION ── */}
-      <div style={{ textAlign: "center", paddingTop: "24px" }}>
-        <p style={{ fontSize: "13px", color: "#64748B", marginBottom: "14px" }}>
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.7, duration: 0.5 }}
+        style={{ textAlign: "center", paddingTop: "24px", zIndex: 10 }}
+      >
+        <p style={{ fontSize: "13px", color: isDark ? "#94A3B8" : "#64748B", marginBottom: "14px" }}>
           Belum punya akun?{" "}
           <button
             onClick={() => navigate("/register")}
@@ -306,8 +346,8 @@ export function LoginScreen() {
         <p style={{ fontSize: "11px", color: "#CBD5E1", fontWeight: 400 }}>
           Fuzzy Logic Automation System • v1.2.0
         </p>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 

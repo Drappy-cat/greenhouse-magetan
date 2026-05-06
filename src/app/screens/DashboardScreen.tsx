@@ -6,7 +6,14 @@ import { BottomNav } from "../components/BottomNav";
 
 export function DashboardScreen() {
   const navigate = useNavigate();
-  const [setpoint, setSetpoint] = useState(25);
+  const [setpoint, setSetpoint] = useState(() => {
+    const saved = localStorage.getItem("gh_setpoint");
+    return saved ? parseInt(saved, 10) : 25;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("gh_setpoint", setpoint.toString());
+  }, [setpoint]);
   const [currentTemp, setCurrentTemp] = useState(28);
   const [currentHumidity, setCurrentHumidity] = useState(65);
   const [weather, setWeather] = useState<"sunny" | "cloudy" | "rainy" | "stormy">("cloudy");
