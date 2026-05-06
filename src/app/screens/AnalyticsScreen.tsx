@@ -333,23 +333,23 @@ export function AnalyticsScreen() {
 
         {/* Activity Log */}
         <div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '14px' }}>
             <p style={{ fontSize: "15px", fontWeight: 700, color: "#1E293B" }}>
               Aktivitas Terakhir
             </p>
-            <div style={{ display: "flex", gap: "8px", overflowX: "auto", paddingBottom: "4px" }}>
+            <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
               {activityFilters.map((f) => (
                 <button
                   key={f}
                   className="no-invert"
                   onClick={() => setActiveActivityFilter(f)}
                   style={{
-                    padding: "6px 14px",
-                    borderRadius: "16px",
+                    padding: "4px 10px",
+                    borderRadius: "12px",
                     border: `1.5px solid ${activeActivityFilter === f ? activityFilterColors[f].border : '#E2E8F0'}`,
                     background: activeActivityFilter === f ? activityFilterColors[f].bg : '#FFFFFF',
                     color: activeActivityFilter === f ? activityFilterColors[f].text : '#64748B',
-                    fontSize: "12px",
+                    fontSize: "11px",
                     fontWeight: 600,
                     cursor: "pointer",
                     whiteSpace: "nowrap",
