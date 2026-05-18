@@ -423,13 +423,13 @@ export function AnalyticsScreen() {
           zIndex: 100,
         }}>
           <div style={{
-            background: 'white',
+            background: 'var(--bg-card)',
             borderRadius: '16px',
             padding: '24px',
             width: 'calc(100% - 40px)',
             maxWidth: '340px',
             fontFamily: "'Inter', sans-serif",
-            boxShadow: "0px 8px 24px rgba(0,0,0,0.15)",
+            boxShadow: "var(--glow-card)",
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
               <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 700, color: 'var(--text-primary)' }}>Pilih Rentang Tanggal</h3>
@@ -446,6 +446,8 @@ export function AnalyticsScreen() {
                   padding: '10px 12px',
                   borderRadius: '8px',
                   border: '1.5px solid var(--border-subtle)',
+                  background: 'var(--bg-input)',
+                  color: 'var(--text-primary)',
                   fontSize: '14px',
                   fontFamily: "'Inter', sans-serif",
                 }}/>
@@ -457,6 +459,8 @@ export function AnalyticsScreen() {
                   padding: '10px 12px',
                   borderRadius: '8px',
                   border: '1.5px solid var(--border-subtle)',
+                  background: 'var(--bg-input)',
+                  color: 'var(--text-primary)',
                   fontSize: '14px',
                   fontFamily: "'Inter', sans-serif",
                 }}/>

@@ -39,6 +39,7 @@
 }
 
 html.dark {
+  color-scheme: dark;
   background: var(--bg-body);
   --bg-body: #06111A;
   --bg-app: #0D1F2D;
