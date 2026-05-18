@@ -176,7 +176,7 @@ export function AnalyticsScreen() {
         style={{
           padding: "56px 20px 16px",
           background: "var(--bg-card)",
-          boxShadow: "0px 1px 4px rgba(0,0,0,0.04)",
+          boxShadow: "var(--glow-card)",
         }}
       >
         <span style={{ fontSize: "20px", fontWeight: 700, color: "var(--text-primary)" }}>Riwayat Data</span>
@@ -216,7 +216,7 @@ export function AnalyticsScreen() {
             background: "var(--bg-card)",
             borderRadius: "16px",
             padding: "18px 16px 12px",
-            boxShadow: "0px 4px 10px rgba(0,0,0,0.05)",
+            boxShadow: "var(--glow-card)",
           }}
         >
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>

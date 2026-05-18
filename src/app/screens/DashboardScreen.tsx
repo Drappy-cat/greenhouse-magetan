@@ -76,7 +76,7 @@ export function DashboardScreen() {
           justifyContent: "space-between",
           padding: "56px 20px 16px",
           background: "var(--bg-card)",
-          boxShadow: "0px 1px 4px rgba(0,0,0,0.04)",
+          boxShadow: "var(--glow-card)",
         }}
       >
         <span style={{ fontSize: "20px", fontWeight: 700, color: "var(--text-primary)" }}>Beranda</span>
@@ -122,7 +122,7 @@ export function DashboardScreen() {
             color: "white",
             position: "relative",
             overflow: "hidden",
-            boxShadow: "0px 8px 24px rgba(59, 130, 246, 0.35)",
+            boxShadow: "var(--glow-primary)",
           }}
         >
           {/* Background decoration */}
@@ -216,7 +216,7 @@ export function DashboardScreen() {
                 padding: "5px 14px",
                 fontSize: "12px",
                 fontWeight: 700,
-                boxShadow: "0px 2px 8px rgba(34, 197, 94, 0.4)",
+                boxShadow: "var(--glow-success)",
               }}
             >
               ✓ Kondisi Stabil
@@ -227,10 +227,10 @@ export function DashboardScreen() {
         {/* Fuzzy Logic Card */}
         <div
           style={{
-            background: "var(--bg-primary-light)",
+            background: "var(--bg-ai-card)",
             borderRadius: "16px",
             padding: "18px",
-            border: "1px solid #DBEAFE",
+            border: "1px solid var(--border-ai-card)",
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "10px" }}>
@@ -249,15 +249,15 @@ export function DashboardScreen() {
             >
               <span style={{ color: "white", fontSize: "13px", fontWeight: 800 }}>AI</span>
             </div>
-            <span style={{ fontSize: "15px", fontWeight: 700, color: "#1E3A8A" }}>Transparansi Fuzzy Logic</span>
+            <span style={{ fontSize: "15px", fontWeight: 700, color: "var(--text-ai-title)" }}>Transparansi Fuzzy Logic</span>
           </div>
-          <p style={{ fontSize: "13.5px", fontWeight: 400, color: "#1E40AF", lineHeight: "1.55", transition: "all 0.3s" }}>
+          <p style={{ fontSize: "13.5px", fontWeight: 400, color: "var(--text-ai-desc)", lineHeight: "1.55", transition: "all 0.3s" }}>
             Sensor membaca suhu{" "}
-            <span style={{ fontWeight: 700, background: "#BFDBFE", borderRadius: "4px", padding: "1px 5px" }}>
+            <span style={{ fontWeight: 700, background: "var(--bg-ai-badge)", borderRadius: "4px", padding: "1px 5px" }}>
               {tempStatus}
             </span>{" "}
             dan kelembaban{" "}
-            <span style={{ fontWeight: 700, background: "#BFDBFE", borderRadius: "4px", padding: "1px 5px" }}>
+            <span style={{ fontWeight: 700, background: "var(--bg-ai-badge)", borderRadius: "4px", padding: "1px 5px" }}>
               NORMAL
             </span>.
             <br />
@@ -273,8 +273,8 @@ export function DashboardScreen() {
           >
             <span
               style={{
-                background: "#DBEAFE",
-                color: "#1E40AF",
+                background: "var(--bg-ai-pill)",
+                color: "var(--text-ai-desc)",
                 borderRadius: "6px",
                 padding: "3px 10px",
                 fontSize: "11px",
@@ -285,8 +285,8 @@ export function DashboardScreen() {
             </span>
             <span
               style={{
-                background: "#DBEAFE",
-                color: "#1E40AF",
+                background: "var(--bg-ai-pill)",
+                color: "var(--text-ai-desc)",
                 borderRadius: "6px",
                 padding: "3px 10px",
                 fontSize: "11px",
@@ -304,7 +304,7 @@ export function DashboardScreen() {
             background: "var(--bg-card)",
             borderRadius: "16px",
             padding: "18px",
-            boxShadow: "0px 4px 10px rgba(0,0,0,0.05)",
+            boxShadow: "var(--glow-card)",
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "16px" }}>
@@ -376,7 +376,7 @@ export function DashboardScreen() {
                 fontSize: "24px",
                 fontWeight: 300,
                 color: "white",
-                boxShadow: "0px 4px 10px rgba(59,130,246,0.35)",
+                boxShadow: "var(--glow-primary)",
               }}
             >
               +
@@ -394,7 +394,7 @@ export function DashboardScreen() {
                 background: "var(--bg-card)",
                 borderRadius: "16px",
                 padding: "18px 14px",
-                boxShadow: "0px 4px 10px rgba(0,0,0,0.05)",
+                boxShadow: "var(--glow-card)",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
@@ -430,7 +430,7 @@ export function DashboardScreen() {
                   padding: "4px 16px",
                   fontSize: "12px",
                   fontWeight: 700,
-                  boxShadow: fanOn ? "0px 2px 6px rgba(34,197,94,0.3)" : "none",
+                  boxShadow: fanOn ? "var(--glow-success)" : "none",
                   transition: "all 0.3s",
                 }}
               >
@@ -444,7 +444,7 @@ export function DashboardScreen() {
                 background: "var(--bg-card)",
                 borderRadius: "16px",
                 padding: "18px 14px",
-                boxShadow: "0px 4px 10px rgba(0,0,0,0.05)",
+                boxShadow: "var(--glow-card)",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
@@ -480,7 +480,7 @@ export function DashboardScreen() {
                   padding: "4px 16px",
                   fontSize: "12px",
                   fontWeight: 700,
-                  boxShadow: heaterOn ? "0px 2px 6px rgba(249,115,22,0.3)" : "none",
+                  boxShadow: heaterOn ? "var(--glow-warning)" : "none",
                   transition: "all 0.3s",
                 }}
               >

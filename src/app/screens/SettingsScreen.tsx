@@ -70,7 +70,7 @@ export function SettingsScreen() {
         style={{
           padding: "56px 20px 16px",
           background: "var(--bg-card)",
-          boxShadow: "0px 1px 4px rgba(0,0,0,0.04)",
+          boxShadow: "var(--glow-card)",
         }}
       >
         <span style={{ fontSize: "20px", fontWeight: 700, color: "var(--text-primary)" }}>Profil & Pengaturan</span>

@@ -101,7 +101,7 @@ export function ScheduleScreen() {
         style={{
           padding: "56px 20px 16px",
           background: "var(--bg-card)",
-          boxShadow: "0px 1px 4px rgba(0,0,0,0.04)",
+          boxShadow: "var(--glow-card)",
         }}
       >
         <span style={{ fontSize: "20px", fontWeight: 700, color: "var(--text-primary)" }}>Jadwal Operasional</span>
@@ -164,7 +164,7 @@ export function ScheduleScreen() {
                 background: "var(--bg-card)",
                 borderRadius: "16px",
                 padding: "20px",
-                boxShadow: "0px 4px 10px rgba(0,0,0,0.05)",
+                boxShadow: "var(--glow-card)",
                 border: schedule.active ? "1.5px solid #D1FAE5" : "1.5px solid var(--bg-hover)",
                 transition: "border 0.3s",
               }}
@@ -271,7 +271,7 @@ export function ScheduleScreen() {
           }}
         >
           <span style={{ fontSize: "16px" }}>💡</span>
-          <p style={{ fontSize: "12px", color: "#1E40AF", lineHeight: "1.5" }}>
+          <p style={{ fontSize: "12px", color: "var(--text-ai-desc)", lineHeight: "1.5" }}>
             Jadwal operasional menggunakan modul RTC DS3231 untuk akurasi waktu yang presisi meskipun tanpa koneksi internet.
           </p>
         </div>

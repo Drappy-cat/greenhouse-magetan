@@ -251,7 +251,7 @@ function EmailStep({ onNext }: { onNext: () => void }) {
             width: "36px",
             height: "36px",
             borderRadius: "10px",
-            background: "#DBEAFE",
+            background: "var(--bg-ai-pill)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -261,7 +261,7 @@ function EmailStep({ onNext }: { onNext: () => void }) {
           <Mail size={18} color="#2563EB" strokeWidth={2} />
         </div>
         <div>
-          <p style={{ margin: "0 0 3px", fontSize: "13px", fontWeight: 700, color: "#1E40AF" }}>
+          <p style={{ margin: "0 0 3px", fontSize: "13px", fontWeight: 700, color: "var(--text-ai-desc)" }}>
             Cek kotak masuk email Anda
           </p>
           <p style={{ margin: 0, fontSize: "12px", color: "#3B82F6", lineHeight: 1.5 }}>

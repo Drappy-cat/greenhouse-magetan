@@ -86,7 +86,7 @@ const typeStyles: Record<NotifType, { bg: string; iconBg: string; iconColor: str
   warning: { bg: "#FFFBEB", iconBg: "#FEF3C7", iconColor: "#D97706", border: "#FDE68A" },
   success: { bg: "#F0FDF4", iconBg: "#DCFCE7", iconColor: "#16A34A", border: "#BBF7D0" },
   error:   { bg: "#FFF1F2", iconBg: "#FFE4E6", iconColor: "#E11D48", border: "#FECDD3" },
-  info:    { bg: "var(--bg-primary-light)", iconBg: "#DBEAFE", iconColor: "#2563EB", border: "#BFDBFE" },
+  info:    { bg: "var(--bg-primary-light)", iconBg: "var(--bg-ai-pill)", iconColor: "#2563EB", border: "var(--bg-ai-badge)" },
 };
 
 export function NotificationScreen() {

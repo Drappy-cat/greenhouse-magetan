@@ -104,7 +104,7 @@ export function LoginScreen() {
           alignItems: "center",
           justifyContent: "center",
           cursor: "pointer",
-          boxShadow: "0px 2px 8px rgba(0,0,0,0.05)",
+          boxShadow: "var(--glow-card)",
           color: "var(--text-secondary)",
           zIndex: 99,
         }}
@@ -130,7 +130,7 @@ export function LoginScreen() {
               display: "flex",
               alignItems: "center",
               gap: "10px",
-              boxShadow: "0px 6px 16px rgba(239, 68, 68, 0.15)",
+              boxShadow: "var(--glow-warning)",
               zIndex: 50,
               width: "max-content",
               maxWidth: "90%",
@@ -498,7 +498,7 @@ function QrLoginPanel({ onSuccess }: { onSuccess: () => void }) {
       >
         <Smartphone size={18} color="#2563EB" strokeWidth={2} style={{ flexShrink: 0, marginTop: "1px" }} />
         <div>
-          <p style={{ margin: "0 0 2px", fontSize: "12px", fontWeight: 700, color: "#1E40AF" }}>
+          <p style={{ margin: "0 0 2px", fontSize: "12px", fontWeight: 700, color: "var(--text-ai-desc)" }}>
             Cara login dengan QR Code
           </p>
           <p style={{ margin: 0, fontSize: "11px", color: "#3B82F6", lineHeight: 1.6 }}>
@@ -757,7 +757,7 @@ const statusBg: Record<QrStatus, string> = {
   waiting: "#F0FDF4", scanning: "var(--bg-primary-light)", scanned: "var(--bg-primary-light)", success: "#F0FDF4",
 };
 const statusBorder: Record<QrStatus, string> = {
-  waiting: "#BBF7D0", scanning: "#BFDBFE", scanned: "#BFDBFE", success: "#BBF7D0",
+  waiting: "#BBF7D0", scanning: "var(--bg-ai-badge)", scanned: "var(--bg-ai-badge)", success: "#BBF7D0",
 };
 const statusDot: Record<QrStatus, string> = {
   waiting: "#22C55E", scanning: "#3B82F6", scanned: "#3B82F6", success: "#22C55E",
