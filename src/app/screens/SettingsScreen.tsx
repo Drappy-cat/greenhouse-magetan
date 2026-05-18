@@ -4,6 +4,8 @@ import { useThemeTransition } from "../hooks/useThemeTransition";
 import { User, Moon, Cpu, Thermometer, Droplets, LogOut, ChevronRight, Wifi, Shield } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { BottomNav } from "../components/BottomNav";
+import PuteraPic from "../../picture/FotoProfile/Putera.png";
+import RizmaPic from "../../picture/FotoProfile/Rizmaindra.png";
 
 export function SettingsScreen() {
   const navigate = useNavigate();
@@ -421,6 +423,85 @@ export function SettingsScreen() {
                 </motion.div>
               )}
             </AnimatePresence>
+          </div>
+        </div>
+
+        {/* Tim Pengembang Group */}
+        <div>
+          <p style={{ fontSize: "12px", fontWeight: 700, color: "var(--icon-muted)", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.8px" }}>
+            Tim Pengembang
+          </p>
+          <div
+            style={{
+              background: "var(--bg-card)",
+              borderRadius: "16px",
+              padding: "16px",
+              boxShadow: "0px 2px 8px rgba(0,0,0,0.04)",
+              display: "flex",
+              flexDirection: "column",
+              gap: "16px",
+            }}
+          >
+            {[
+              {
+                name: "Rizma Indra Pramuda",
+                id: "25051204370",
+                role: "Fullstack Developer",
+                pic: RizmaPic
+              },
+              {
+                name: "Putera Al Khalidi",
+                id: "25051204362",
+                role: "Front End Developer",
+                pic: PuteraPic
+              },
+              {
+                name: "Leony Andika Triwicaksono",
+                id: "25051204324",
+                role: "Penulis",
+                pic: null
+              }
+            ].map((dev, idx) => (
+              <div key={idx} style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                <div
+                  style={{
+                    width: "48px",
+                    height: "48px",
+                    borderRadius: "50%",
+                    background: "var(--bg-hover)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    overflow: "hidden",
+                    border: "2px solid var(--border-subtle)",
+                    flexShrink: 0
+                  }}
+                >
+                  {dev.pic ? (
+                    <img src={dev.pic} alt={dev.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  ) : (
+                    <User size={24} color="var(--icon-muted)" />
+                  )}
+                </div>
+                <div>
+                  <p style={{ fontSize: "14px", fontWeight: 600, color: "var(--text-primary)", lineHeight: "1.2", marginBottom: "4px" }}>{dev.name}</p>
+                  <p style={{ fontSize: "12px", color: "var(--icon-muted)", marginBottom: "4px" }}>{dev.id}</p>
+                  <span
+                    style={{
+                      background: "var(--bg-primary-light)",
+                      color: "#3B82F6",
+                      fontSize: "10px",
+                      fontWeight: 700,
+                      padding: "2px 8px",
+                      borderRadius: "6px",
+                      display: "inline-block"
+                    }}
+                  >
+                    {dev.role}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
