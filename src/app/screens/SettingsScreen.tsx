@@ -4,8 +4,8 @@ import { useThemeTransition } from "../hooks/useThemeTransition";
 import { User, Moon, Cpu, Thermometer, Droplets, LogOut, ChevronRight, Wifi, Shield } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { BottomNav } from "../components/BottomNav";
-import PuteraPic from "../../picture/FotoProfile/Putera.png";
-import RizmaPic from "../../picture/FotoProfile/Rizmaindra.png";
+import PuteraPic from "../../Picture/FotoProfile/Putera.png";
+import RizmaPic from "../../Picture/FotoProfile/Rizmaindra.png";
 
 export function SettingsScreen() {
   const navigate = useNavigate();
